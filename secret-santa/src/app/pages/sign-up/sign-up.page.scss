@@ -1,0 +1,20 @@
+// Container: div that holds the page's main content
+#container {
+    display: block;
+}
+
+// title-div: holds the page's title
+#title-div {
+    // Position content horizontally/vertically
+    text-align: center;
+    margin-bottom: 5%;
+    margin-top: 3
+    0%;
+}
+
+// styling for page title text
+.title {
+    color: #CC2936;
+    font-family: 'Inconsolata';
+    font-size: 2em;
+}

@@ -1,14 +1,9 @@
+// Container: div that holds the page's main content
 #container {
  display: block;
 }
 
-#welcome {
-  // Position content horizontally/vertically
-  text-align: center;
-  margin-bottom: 5%;
-  margin-top: 40%;
-}
-
+// styling for the login/sign up buttons
 ion-button {
   display: block;
   margin-left: auto;
@@ -16,10 +11,17 @@ ion-button {
   width: 60%;
 }
 
-#title {
-  font-size: large;
+// styling for page title text
+.title {
+  color: #251605;
+  font-family: 'Inconsolata';
+  font-size: 3em;
 }
 
-p {
-  font-size: 30%;
+// title-div: holds the page's title
+#title-div {
+  // Position content horizontally/vertically
+  margin-bottom: 5%;
+  margin-top: 40%;
+  text-align: center;
 }

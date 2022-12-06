@@ -1,4 +1,5 @@
 <ion-header>
+  <!--TODO: figure out spacing so we don't need a placeholder ion-header-->
   <ion-toolbar>
     <ion-title>sign-up</ion-title>
   </ion-toolbar>
@@ -6,18 +7,28 @@
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
-
+      <!--TODO: make Back button and ion-title display inline-->
     <ion-buttons>
       <ion-back-button defaultHref="/home">Back</ion-back-button>
     </ion-buttons>
-    
     <ion-toolbar>
-      <ion-title size="large">Create Account</ion-title>
+      <!--Just page title for now-->
+      <ion-title size="large">Sign up</ion-title>
     </ion-toolbar>
   </ion-header>
 
+  <!--Container div holds main content-->
   <div id="container">
-    <strong>Welcome to Secret Santa!</strong>
+    <!--title-div wraps title for display purposes-->
+    <div id="title-div">
+      <strong class="title">create account</strong>
+    </div>
+
+    <!--TODO: make this an ngfor display?-->
+    <ion-input>email</ion-input>
+    <ion-input>password</ion-input>
+    <ion-input>confirm password</ion-input>
+
     <ion-button routerLink="/create-profile">Done</ion-button>
 
   </div>
