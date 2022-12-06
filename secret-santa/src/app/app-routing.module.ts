@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'user-home',
     loadChildren: () => import('./pages/user-home/user-home.module').then( m => m.UserHomePageModule)
   },
+  {
+    path: 'create-profile',
+    loadChildren: () => import('./pages/create-profile/create-profile.module').then( m => m.CreateProfilePageModule)
+  },
 ];
 
 @NgModule({
