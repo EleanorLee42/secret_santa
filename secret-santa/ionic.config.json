@@ -1,0 +1,7 @@
+{
+  "name": "secret-santa",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
