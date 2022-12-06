@@ -1,21 +1,22 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Home check change
-    </ion-title>
+    <ion-title>sign-up</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
+
+    <ion-buttons>
+      <ion-back-button defaultHref="/home">Back</ion-back-button>
+    </ion-buttons>
+    
     <ion-toolbar>
-      <ion-title size="large">Home</ion-title>
+      <ion-title size="large">Create Account</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <div id="container">
     <strong>Welcome to Secret Santa!</strong>
-    <ion-button routerLink="/login">Login</ion-button>
-    <ion-button routerLink="/sign-up">Sign up</ion-button>
   </div>
 </ion-content>
