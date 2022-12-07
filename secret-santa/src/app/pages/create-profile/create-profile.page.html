@@ -6,18 +6,31 @@
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
-
     <ion-buttons>
       <ion-back-button defaultHref="/sign-up">Back</ion-back-button>
     </ion-buttons>
-    
     <ion-toolbar>
-      <ion-title size="large">Create profile</ion-title>
+      <!-- <ion-title size="large" class="title">create profile</ion-title> -->
     </ion-toolbar>
   </ion-header>
 
   <div id="container">
+    <!--title-div wraps title for display purposes-->
+    <div id="title-div">
+      <strong class="title">create profile</strong>
+    </div>
+
     <strong>Add details about your interests!</strong>
+    <!--TODO: make this an ngfor display?-->
+    <ion-item lines="none">
+      <ion-input class="input">name</ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-input class="input">phone number</ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-textarea class="input">interests (cooking, coffee, Batman, etc.)</ion-textarea>
+    </ion-item>
     <ion-button routerLink="/user-home">Done</ion-button>
 
   </div>

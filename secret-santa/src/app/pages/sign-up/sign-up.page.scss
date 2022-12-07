@@ -3,18 +3,34 @@
     display: block;
 }
 
+// styling for Done button (is only button on pg)
+ion-button {
+    font-size: 1.2em;
+    margin-left: 70%;
+    margin-right: auto;
+    margin-top: 10%;
+}
+
+// styling for input fields
+ion-input.input {
+    background-color: #D9D9D9;
+    font-size: 1.2em;
+    height: 100%;
+    margin-bottom: 10%;
+    margin-left: 3%;
+    margin-right: auto;
+    max-width: 90%;
+    --padding-start: 10px; // why is this not working?? 
+}
+
 // title-div: holds the page's title
 #title-div {
     // Position content horizontally/vertically
     text-align: center;
-    margin-bottom: 5%;
-    margin-top: 3
-    0%;
+    margin-bottom: 20%;
 }
 
 // styling for page title text
 .title {
     color: #CC2936;
-    font-family: 'Inconsolata';
-    font-size: 2em;
 }

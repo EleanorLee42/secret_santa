@@ -12,8 +12,8 @@
       <ion-back-button defaultHref="/home">Back</ion-back-button>
     </ion-buttons>
     <ion-toolbar>
-      <!--Just page title for now-->
-      <ion-title size="large">Sign up</ion-title>
+      <!-- Just page title for now
+      <ion-title size="large">Sign up</ion-title> -->
     </ion-toolbar>
   </ion-header>
 
@@ -25,9 +25,9 @@
     </div>
 
     <!--TODO: make this an ngfor display?-->
-    <ion-input>email</ion-input>
-    <ion-input>password</ion-input>
-    <ion-input>confirm password</ion-input>
+    <ion-item lines="none"><ion-input class="input">email</ion-input></ion-item>
+    <ion-item lines="none"><ion-input class="input">password</ion-input></ion-item>
+    <ion-item lines="none"><ion-input class="input">confirm password</ion-input></ion-item>
 
     <ion-button routerLink="/create-profile">Done</ion-button>
 
