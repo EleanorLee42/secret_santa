@@ -27,6 +27,14 @@ const routes: Routes = [
     path: 'create-profile',
     loadChildren: () => import('./pages/create-profile/create-profile.module').then( m => m.CreateProfilePageModule)
   },
+  {
+    path: 'group-view',
+    loadChildren: () => import('./pages/group-view/group-view.module').then( m => m.GroupViewPageModule)
+  },
+  {
+    path: 'person-view',
+    loadChildren: () => import('./pages/person-view/person-view.module').then( m => m.PersonViewPageModule)
+  },
 ];
 
 @NgModule({

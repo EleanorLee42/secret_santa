@@ -1,0 +1,24 @@
+// class to set bkgd to brown (for ion-toolbar)
+.brown-background {
+    --background: #251605;
+}
+
+// class for styling page header
+.header {
+    align-items: center;
+    background-color: #251605;
+}
+
+// styling for page title/welcome msg
+ion-title {
+    color: #FFFCF2;
+    font-family: 'Inconsolata';
+    font-size: 1.9em;
+    text-align: center;
+    white-space: normal;
+}
+
+// set padding for page header
+.ion-padding-vertical {
+    padding: 18% 0;
+}

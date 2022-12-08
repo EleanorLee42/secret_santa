@@ -1,19 +1,15 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>user-home</ion-title>
+<ion-header collapse="condense" class="header ion-padding-vertical">
+  <ion-toolbar class="brown-background">
+    <!--TODO: how to get text to wrap??-->
+    <ion-title size="large">Welcome home, Claus :)</ion-title>
+    
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    
-    <ion-toolbar>
-      <ion-title size="large">User Home</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
   <div id="container">
-    <strong>Welcome home, Claus :)</strong>
+    <strong>display groups here</strong>
+    <app-group-banner></app-group-banner>
 
   </div>
 </ion-content>

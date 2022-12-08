@@ -1,3 +1,15 @@
+// alternate green/red colors for buttons!!
+// this is very exciting!!!
+ion-button:nth-child(even) {
+  --background: #138A36;
+  --background-activated: #138A36;
+}
+
+ion-button:nth-child(odd) {
+  --background: #CC2936;
+  --background-activated: #CC2936;
+}
+
 // Container: div that holds the page's main content
 #container {
  display: block;

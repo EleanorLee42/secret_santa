@@ -3,8 +3,10 @@
     display: block;
 }
 
-// styling for Done button (is only button on pg)
-ion-button {
+// styling for Done button
+#done-btn {
+    --background: #CC2936;
+    --background-activated: #CC2936;
     font-size: 1.2em;
     margin-left: 70%;
     margin-right: auto;
