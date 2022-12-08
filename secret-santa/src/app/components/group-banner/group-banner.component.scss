@@ -1,0 +1,29 @@
+.button {
+    height: 20%;
+    padding: 3%;
+    width: 80%;
+}
+
+.button-subcontent {
+    display: inline;
+}
+
+#exchange-date {
+    // display: inline;
+    text-align: right;
+}
+
+#giftee {
+    // display: inline;
+    margin-left: 0px;
+    text-align: left;
+    width: 50%;
+}
+
+#group-name {
+    font-size: 1.5em;
+    display: block;
+    margin-bottom: 3%;
+    font-weight: bold;
+    text-align: left;
+}

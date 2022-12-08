@@ -3,10 +3,19 @@
     --background: #251605;
 }
 
+// styling for content below header
+.content {
+    margin-left: 3%;
+}
+
 // class for styling page header
 .header {
     align-items: center;
     background-color: #251605;
+}
+
+.ion-text-wrap {
+    white-space: normal;
 }
 
 // styling for page title/welcome msg
@@ -21,4 +30,11 @@ ion-title {
 // set padding for page header
 .ion-padding-vertical {
     padding: 18% 0;
+}
+
+// styling for strong text ("My groups")
+.my-groups {
+    font-size: 1.5em;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }

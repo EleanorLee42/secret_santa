@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { UserHomePage } from './user-home.page';
+import { GroupBannerComponent } from './group-banner.component';
 
-describe('UserHomePage', () => {
-  let component: UserHomePage;
-  let fixture: ComponentFixture<UserHomePage>;
+describe('GroupBannerComponent', () => {
+  let component: GroupBannerComponent;
+  let fixture: ComponentFixture<GroupBannerComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [UserHomePage],
+      declarations: [ GroupBannerComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(UserHomePage);
+    fixture = TestBed.createComponent(GroupBannerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

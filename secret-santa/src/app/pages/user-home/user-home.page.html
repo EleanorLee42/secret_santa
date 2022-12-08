@@ -2,14 +2,17 @@
   <ion-toolbar class="brown-background">
     <!--TODO: how to get text to wrap??-->
     <ion-title size="large">Welcome home, Claus :)</ion-title>
-    
+  
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div id="container">
-    <strong>display groups here</strong>
-    <app-group-banner></app-group-banner>
+  <div class="content">
+    <div class="my-groups">
+      <strong>My groups</strong>
+    </div>
 
+    <app-group-banner></app-group-banner>
   </div>
 </ion-content>
