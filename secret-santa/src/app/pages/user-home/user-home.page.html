@@ -13,6 +13,15 @@
       <strong>My groups</strong>
     </div>
 
-    <app-group-banner></app-group-banner>
+    <!--TODO: make this an ngfor display of user's groups-->
+    <!--Also make the banner colors alternate-->
+    <group-banner></group-banner>
+
+    <div class="foot-div">
+      <!--TODO: add grid to put these in two columns-->
+      <ion-button routerLink="/edit-profile">Profile</ion-button>
+      <ion-button id="plus-button" shape="round">+</ion-button>
+    </div>
+    
   </div>
 </ion-content>

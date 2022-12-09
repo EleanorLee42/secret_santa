@@ -35,6 +35,14 @@ const routes: Routes = [
     path: 'person-view',
     loadChildren: () => import('./pages/person-view/person-view.module').then( m => m.PersonViewPageModule)
   },
+  {
+    path: 'edit-profile',
+    loadChildren: () => import('./pages/edit-profile/edit-profile.module').then( m => m.EditProfilePageModule)
+  },
+  {
+    path: 'new-group',
+    loadChildren: () => import('./pages/new-group/new-group.module').then( m => m.NewGroupPageModule)
+  },
 ];
 
 @NgModule({

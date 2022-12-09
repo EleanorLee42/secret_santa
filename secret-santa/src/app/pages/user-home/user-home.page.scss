@@ -8,10 +8,22 @@
     margin-left: 3%;
 }
 
+// keep profile, new group buttons at bottom of page
+.foot-div {
+    position: fixed;
+    bottom: 0%;
+}
+
 // class for styling page header
 .header {
     align-items: center;
     background-color: #251605;
+}
+
+ion-button {
+    --background: #F3B700;
+    --background-activated: #F3B700;
+    font-size: larger;
 }
 
 .ion-text-wrap {
@@ -38,3 +50,12 @@ ion-title {
     margin-top: 5%;
     margin-bottom: 5%;
 }
+
+#plus-button {
+    background-color: #F3B700;
+    border-radius: 50%;
+    font-size: xx-large;
+    height: 8vh;
+    text-align: center;
+    // width:9vw;
+} 
