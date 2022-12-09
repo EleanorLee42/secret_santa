@@ -1,0 +1,75 @@
+// class to set bkgd to red (for ion-toolbar)
+.red-background {
+    --background: #CC2936;
+}
+
+// styling for non-header/-footer elements
+.content {
+    font-size: 1.4em;
+    margin-left: 5%;
+    margin-top: 5%;
+}
+
+// keep home button at bottom of page
+.foot-div {
+    position: fixed;
+    bottom: 0.5%;
+    left: 1%
+}
+
+// class for styling page header
+.header {
+    align-items: center;
+    background-color: #CC2936;
+    margin-bottom: 5%;
+}
+
+// styling for home button
+ion-button {
+    --background: #F3B700;
+    --background-activated: #F3B700;
+    font-size: larger;
+}
+
+// more styling for non-header/-footer elements
+ion-content {
+    margin-left: 5%;
+}
+
+// set padding for page header
+.ion-padding-vertical {
+    padding-top: 15%;
+    padding-bottom: 10%;
+}
+
+// styling for page title/welcome msg
+ion-title {
+    color: #FFFCF2;
+    font-size: 2.5em;
+    text-align: left;
+    white-space: normal;
+}
+
+// styling for join code text
+.join-code {
+    color: #FFFCF2;
+    font-family: 'Inconsolata';
+    font-size: 1.4em;
+    margin-left: 5%;
+    margin-top: 10%;
+    margin-bottom: 0%;
+}
+
+// styling for member names
+.member {
+    font-family: 'Inconsolata';
+}
+
+// alternate green/red colors for member names!!
+// this is very exciting!!!
+p.member:nth-child(even) {
+    color: #138A36;
+  }
+p.member:nth-child(odd) {
+    color: #CC2936;
+  }

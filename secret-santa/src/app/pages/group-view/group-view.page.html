@@ -1,9 +1,30 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>group-view</ion-title>
+<ion-header collapse="condense" class="header ion-padding-vertical">
+  
+  <!--TODO: make group color variable? Or store it in db somehow?-->
+  <ion-toolbar class="red-background">
+    <!--TODO: how to get text to wrap??-->
+    <ion-title size="large">The test group</ion-title>
   </ion-toolbar>
+
+  <p class="join-code">Join code: 3141592</p>
 </ion-header>
 
 <ion-content>
+  <div class="content description">Here is a description of the group.</div>
+  <div class="content exchange-date">Exchange date: Dec 24, 2022</div>
+  <div class="content people-div">
+    <p>People:</p>
+    <!--TODO: make this an ngfor display of group members-->
+    <!--Also pass person's name/id/whatever thru click event-->
+    <p class="member" (click)="eventOnClick()">Bobbert</p>
+    <p class="member" (click)="eventOnClick()">Joe Bob</p>
+    <p class="member" (click)="eventOnClick()">Billy Bob</p>
+    <p class="member" (click)="eventOnClick()">Bob</p>
+    <p class="member" (click)="eventOnClick()">Boberta</p>
+  </div>
 
+  <div class="foot-div">
+    <!--TODO: can the animation here go backwards?-->
+    <ion-button routerLink="/user-home">Home</ion-button>
+  </div>
 </ion-content>

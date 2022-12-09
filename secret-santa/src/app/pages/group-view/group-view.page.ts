@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-group-view',
@@ -7,7 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GroupViewPage implements OnInit {
 
-  constructor() { }
+  constructor( private router: Router ) { }
+
+  /* eventOnClick() is called when a person is clicked.
+     It navigates to the person-view page. 
+  */
+  eventOnClick() {
+    this.router.navigateByUrl('/person-view');
+  }
 
   ngOnInit() {
   }
