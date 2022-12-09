@@ -25,9 +25,18 @@
     </div>
 
     <!--TODO: make this an ngfor display?-->
-    <ion-item lines="none"><ion-input class="input">email</ion-input></ion-item>
-    <ion-item lines="none"><ion-input class="input">password</ion-input></ion-item>
-    <ion-item lines="none"><ion-input class="input">confirm password</ion-input></ion-item>
+    <ion-item lines="none">
+      <ion-input class="input" type="email"
+      [clearOnEdit]="true" placeholder="email"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-input class="input" type="password"
+      [clearOnEdit]="true" placeholder="password"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-input class="input" type="password"
+      [clearOnEdit]="true" placeholder="confirm password"></ion-input>
+    </ion-item>
 
     <ion-button id="done-btn" routerLink="/create-profile">Done</ion-button>
 

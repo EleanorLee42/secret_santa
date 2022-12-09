@@ -16,15 +16,15 @@
     <p>People:</p>
     <!--TODO: make this an ngfor display of group members-->
     <!--Also pass person's name/id/whatever thru click event-->
-    <p class="member" (click)="eventOnClick()">Bobbert</p>
-    <p class="member" (click)="eventOnClick()">Joe Bob</p>
-    <p class="member" (click)="eventOnClick()">Billy Bob</p>
-    <p class="member" (click)="eventOnClick()">Bob</p>
-    <p class="member" (click)="eventOnClick()">Boberta</p>
+    <p class="member" routerLink="/person-view">Bobbert</p>
+    <p class="member" routerLink="/person-view">Joe Bob</p>
+    <p class="member" routerLink="/person-view">Billy Bob</p>
+    <p class="member" routerLink="/person-view">Bob</p>
+    <p class="member" routerLink="/person-view">Boberta</p>
   </div>
 
   <div class="foot-div">
     <!--TODO: can the animation here go backwards?-->
-    <ion-button routerLink="/user-home">Home</ion-button>
+    <ion-button routerLink="/user-home" routerDirection="back">Home</ion-button>
   </div>
 </ion-content>

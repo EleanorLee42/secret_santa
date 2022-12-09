@@ -1,0 +1,52 @@
+// keep profile, new group buttons at bottom of page
+.foot-div {
+    position: fixed;
+    bottom: 1%;
+    right: 2%;
+}
+
+// class to set bkgd to green (for ion-toolbar)
+.green-background {
+    --background: #138A36;
+}
+
+// class for styling page header
+.header {
+    background-color: #138A36;
+}
+
+// styling for ion-item that holds Name input
+.input-name {
+    // border: 2px solid 251605;
+    color: #FFFCF2;
+    font-size: 2.5em;
+    font-weight: bold;
+    text-align: left;
+    width: 90%;
+    max-width: 90%;
+}
+
+// style buttons at bottom of page
+ion-button {
+    --background: #F3B700;
+    --background-activated: #F3B700;
+    font-size: larger;
+}
+
+// use shadow part to set background color for input
+ion-item.input-name::part(native) {
+    background-color: #138A36;
+  }
+
+// set padding for page header
+.ion-padding-vertical {
+    padding: 12% 0;
+}
+
+// styling for page title/welcome msg
+ion-title {
+    color: #FFFCF2;
+    font-size: 2.5em;
+    text-align: left;
+    white-space: normal;
+}

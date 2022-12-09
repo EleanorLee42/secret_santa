@@ -26,13 +26,13 @@
 
     <!--TODO: make this an ngfor display?-->
     <ion-item lines="none">
-      <ion-input class="input">name</ion-input>
+      <ion-input class="input"[clearOnEdit]="true" placeholder="name"></ion-input>
     </ion-item>
     <ion-item lines="none">
-      <ion-input class="input">phone number</ion-input>
+      <ion-input class="input" type="tel" [clearOnEdit]="true" placeholder="phone number"></ion-input>
     </ion-item>
     <ion-item lines="none">
-      <ion-textarea class="input">interests (cooking, coffee, Batman, etc.)</ion-textarea>
+      <ion-textarea class="input" [clearOnEdit]="true" placeholder="interests (cooking, coffee, Batman, etc.)"></ion-textarea>
     </ion-item>
     <ion-button routerLink="/user-home">Done</ion-button>
 

@@ -22,8 +22,14 @@
       <strong class="title">welcome back</strong>
     </div>
     <!--TODO: make this an ngfor display?-->
-    <ion-item lines="none"><ion-input class="input">email</ion-input></ion-item>
-    <ion-item lines="none"><ion-input class="input">password</ion-input></ion-item>
+    <ion-item lines="none">
+      <ion-input [clearOnEdit]="true" class="input" 
+      type="email" placeholder="email"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-input [clearOnEdit]="true" class="input"
+      type="password" placeholder="password"></ion-input>
+    </ion-item>
     
     <ion-button id="done-btn" routerLink="/user-home">Done</ion-button>
   </div>
