@@ -8,6 +8,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/comp
 import { AngularFireMessaging } from '@angular/fire/compat/messaging';
 
 interface Group {
+  GifteeName: string,
   GifteeID: string,
   GroupID: string
 }
@@ -41,10 +42,28 @@ export class UserHomePage implements OnInit {
   ) {
     this.listenForMessages();
   }
+  assignPartners = (groupIndex: number) => {
+    let partner: Person;
+    //Fisher-Yates shuffle from w3schools
+    for (let i = this.people!.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      let k = this.people![i];
+      this.people![i] = this.people![j];
+      this.people![j] = k;
+    }
+    for (let i = 0; i < this.people!.length; i++) {
+      this.people![i].Groups[groupIndex].GifteeID = this.people![(i + 1) % this.people!.length].id;
+      this.people![i].Groups[groupIndex].GifteeName = this.people![(i + 1) % this.people!.length].Name;
+    }
+    console.log(this.people);
+    this.people!.forEach(element => {
+      this.collection.doc(element.id).update(element);
+    });
+  }
   changeDatabase = (index: number) => {
     let person = this.people![index];
     person.Token = this.token!;
-    person.Groups[0].GifteeID = person.Groups[0].GifteeID + 1;
+    // person.Groups[0].GifteeID = person.Groups[0].GifteeID + 1;
     this.collection.doc(person.id).update(person);
 
   }

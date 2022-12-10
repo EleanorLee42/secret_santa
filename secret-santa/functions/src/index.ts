@@ -5,22 +5,22 @@ admin.initializeApp(
 );
 
 exports.docChange = functions.firestore.document("People/{docId}").onUpdate(async (change: any) => {
-  console.log("function fired");
-  let token: string;
-  token = await change.after.data().Token;
-  console.log(token);
-  const message = {
-    token: token,
-    notification: {
-      title: 'test auto notification',
-      body: "Hello world"
-    },
-    android: {
+  let person = await change.after.data();
+  let oldPerson = await change.before.data();
+  if (person.Groups[0].GifteeID !== 0 && oldPerson.Groups[0].GifteeID === "") {
+    let token: string = person.Token;
+    const message = {
+      token: token,
       notification: {
-        channel_id: "order_updates"
+        title: 'Come meet your giftee!',
+        body: "You got matched with " + person.Groups[0].GifteeName
+      },
+      android: {
+        notification: {
+          channel_id: "order_updates"
+        }
       }
-    }
-  };
-  let response = await admin.messaging().send(message);
-  console.log(response);
+    };
+    await admin.messaging().send(message);
+  }
 });

@@ -13,7 +13,6 @@ import { environment } from '../environments/environment';
 import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { AngularFireModule } from '@angular/fire/compat';
-import { provideAuth, getAuth } from '@angular/fire/auth';
 // import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 // import { provideFunctions,getFunctions } from '@angular/fire/functions';
 // import { provideMessaging,getMessaging } from '@angular/fire/messaging';
