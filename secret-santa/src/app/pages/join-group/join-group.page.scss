@@ -1,19 +1,27 @@
+// styling for cancel button
+#cancel-btn {
+    --background: #251605;
+    --background-activated: #251605;
+    font-size: 1.2em;
+    margin-left: 8%;
+}
+
 // Container: div that holds the page's main content
 #container {
     display: block;
 }
 
-// styling for Done button (is only button on pg)
-ion-button {
-    --background: #CC2936;
-    --background-activated: #CC2936;
+// styling for Done button
+#done-btn {
+    --background: #138A36;
+    --background-activated: #138A36;
     font-size: 1.2em;
     margin-left: 70%;
     margin-right: auto;
     margin-top: 10%;
 }
 
-// styling for single-line inputs
+// styling for input fields
 ion-input.input {
     background-color: #D9D9D9;
     font-size: 1.2em;
@@ -22,30 +30,17 @@ ion-input.input {
     margin-left: 3%;
     margin-right: auto;
     max-width: 90%;
-    --padding-start: 10px; // why is this not working??
-    
-}
-
-// styling for multi-line inputs
-ion-textarea {
-    background-color: #D9D9D9;
-    font-size: 1.2em;
-    height: 100%;
-    margin-bottom: 10%;
-    margin-left: 3%;
-    margin-right: auto;
-    max-width: 90%;
-    
+    --padding-start: 10px; // why is this not working?? 
 }
 
 // title-div: holds the page's title
 #title-div {
     // Position content horizontally/vertically
     text-align: center;
-    margin-bottom: 15%;
+    margin-bottom: 20%;
 }
 
 // styling for page title text
 .title {
-    color: #CC2936;
+    color: #138A36;
 }

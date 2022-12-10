@@ -43,6 +43,14 @@ const routes: Routes = [
     path: 'new-group',
     loadChildren: () => import('./pages/new-group/new-group.module').then( m => m.NewGroupPageModule)
   },
+  {
+    path: 'create-group',
+    loadChildren: () => import('./pages/create-group/create-group.module').then( m => m.CreateGroupPageModule)
+  },
+  {
+    path: 'join-group',
+    loadChildren: () => import('./pages/join-group/join-group.module').then( m => m.JoinGroupPageModule)
+  },
 ];
 
 @NgModule({

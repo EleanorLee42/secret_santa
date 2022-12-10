@@ -1,0 +1,36 @@
+// Container: div that holds the page's main content
+#container {
+    display: block;
+}
+
+// styling for the login/sign up buttons
+ion-button {
+    display: block;
+    margin-bottom: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+}
+
+// alternate green/red colors for buttons
+ion-button:nth-child(even) {
+    --background: #138A36;
+    --background-activated: #138A36;
+}
+ion-button:nth-child(odd) {
+    --background: #CC2936;
+    --background-activated: #CC2936;
+}
+
+// styling for page title text
+.title {
+    color: #251605;
+}
+
+// title-div: holds the page's title
+#title-div {
+    // Position content horizontally/vertically
+    margin-bottom: 20%;
+    margin-top: 5%;
+    text-align: center;
+  }

@@ -4,6 +4,24 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    
+    <ion-buttons>
+      <ion-back-button defaultHref="/user-home"></ion-back-button>
+    </ion-buttons>
+    <ion-toolbar>
+    </ion-toolbar>
+  </ion-header>
 
+  <!--Container div holds main content-->
+  <div id="container">
+    <!--title-div wraps title for display purposes-->
+    <div id="title-div">
+      <strong class="title">add group</strong>
+    </div>
+    <!--TODO: make this an ngfor display?-->
+    <ion-button routerLink="/join-group">Join group</ion-button>
+      <ion-button routerLink="/create-group">Create group</ion-button>
+  </div>
 </ion-content>

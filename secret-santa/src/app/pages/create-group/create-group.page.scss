@@ -1,3 +1,11 @@
+// styling for cancel button
+#cancel-btn {
+    --background: #251605;
+    --background-activated: #251605;
+    font-size: 1.2em;
+    margin-left: 8%;
+}
+
 // Container: div that holds the page's main content
 #container {
     display: block;
@@ -31,7 +39,7 @@ ion-textarea {
     background-color: #D9D9D9;
     font-size: 1.2em;
     height: 100%;
-    margin-bottom: 10%;
+    margin-bottom: 20%;
     margin-left: 3%;
     margin-right: auto;
     max-width: 90%;
