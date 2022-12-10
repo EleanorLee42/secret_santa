@@ -10,8 +10,12 @@
 
 // keep profile, new group buttons at bottom of page
 .foot-div {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
     position: fixed;
-    bottom: 0%;
+    width: 94%;
+    bottom: 1%;
 }
 
 // class for styling page header
@@ -24,6 +28,8 @@
 ion-button {
     --background: #F3B700;
     --background-activated: #F3B700;
+    --border-color: #251605;
+    --color: #FFFCF2;
     font-size: larger;
 }
 
@@ -60,5 +66,4 @@ ion-title {
     font-size: xx-large;
     height: 8vh;
     text-align: center;
-    // width:9vw;
 } 
