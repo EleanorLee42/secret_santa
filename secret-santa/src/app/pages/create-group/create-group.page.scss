@@ -1,9 +1,17 @@
+// style div that holds done/cancel buttons
+#button-div {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 7.5%;
+    margin-top: 15%;
+    width: 84%;
+}
+
 // styling for cancel button
 #cancel-btn {
     --background: #251605;
     --background-activated: #251605;
     font-size: 1.2em;
-    margin-left: 8%;
 }
 
 // Container: div that holds the page's main content
@@ -16,9 +24,6 @@ ion-button {
     --background: #CC2936;
     --background-activated: #CC2936;
     font-size: 1.2em;
-    margin-left: 70%;
-    margin-right: auto;
-    margin-top: 10%;
 }
 
 // styling for single-line inputs
@@ -30,7 +35,7 @@ ion-input.input {
     margin-left: 3%;
     margin-right: auto;
     max-width: 90%;
-    --padding-start: 10px; // why is this not working??
+    --padding-start: 10px;
     
 }
 

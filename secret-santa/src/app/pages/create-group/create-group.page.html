@@ -33,8 +33,10 @@
       <ion-textarea class="input" [clearOnEdit]="true" placeholder="group description"></ion-textarea>
     </ion-item>
 
-    <ion-button routerLink="/user-home">Done</ion-button>
-    <ion-button id="cancel-btn" routerLink="/user-home" routerDirection="back">Cancel</ion-button>
+    <div id="button-div">
+      <ion-button id="cancel-btn" routerLink="/user-home" routerDirection="back">Cancel</ion-button>
+      <ion-button id="done-btn" routerLink="/group-view">Done</ion-button>
+    </div>
 
   </div>
 </ion-content>
