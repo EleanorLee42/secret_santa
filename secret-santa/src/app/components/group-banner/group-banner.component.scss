@@ -1,0 +1,36 @@
+// styling for the button
+.button {
+    background-color: #CC2936; // TODO: this should be an input variable?
+    color: #FFFCF2;
+    height: 20%;
+    padding: 3%;
+    width: 95%;
+}
+
+// styling for giftee name, exchange date
+.button-subcontent {
+    display: inline;
+}
+
+// styling for exchange date text
+#exchange-date {
+    // display: inline;
+    text-align: right;
+}
+
+// styling for giftee name
+#giftee {
+    // display: inline;
+    margin-left: 0px;
+    text-align: left;
+    width: 50%;
+}
+
+// styling for group name
+#group-name {
+    font-size: 1.5em;
+    display: block;
+    margin-bottom: 3%;
+    font-weight: bold;
+    text-align: left;
+}

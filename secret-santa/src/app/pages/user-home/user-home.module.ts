@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { UserHomePageRoutingModule } from './user-home-routing.module';
 
 import { UserHomePage } from './user-home.page';
+import { GroupBannerComponent } from '../../components/group-banner/group-banner.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { UserHomePage } from './user-home.page';
     IonicModule,
     UserHomePageRoutingModule
   ],
-  declarations: [UserHomePage]
+  declarations: [UserHomePage, GroupBannerComponent]
 })
 export class UserHomePageModule {}

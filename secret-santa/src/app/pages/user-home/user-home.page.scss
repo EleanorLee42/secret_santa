@@ -1,0 +1,64 @@
+// class to set bkgd to brown (for ion-toolbar)
+.brown-background {
+    --background: #251605;
+}
+
+// styling for content below header
+.content {
+    margin-left: 3%;
+}
+
+// keep profile, new group buttons at bottom of page
+.foot-div {
+    position: fixed;
+    bottom: 0%;
+}
+
+// class for styling page header
+.header {
+    align-items: center;
+    background-color: #251605;
+}
+
+// style buttons at bottom of page
+ion-button {
+    --background: #F3B700;
+    --background-activated: #F3B700;
+    font-size: larger;
+}
+
+.ion-text-wrap {
+    white-space: normal;
+}
+
+// styling for page title/welcome msg
+ion-title {
+    color: #FFFCF2;
+    font-family: 'Inconsolata';
+    font-size: 1.9em;
+    text-align: center;
+    white-space: normal;
+}
+
+// set padding for page header
+.ion-padding-vertical {
+    padding: 18% 0;
+}
+
+// styling for strong text ("My groups")
+.my-groups {
+    color: #251605;
+    font-size: 1.5em;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+// style new group button
+#plus-button {
+    background-color: #F3B700;
+    border-radius: 50%;
+    font-size: xx-large;
+    height: 8vh;
+    text-align: center;
+    // width:9vw;
+} 
