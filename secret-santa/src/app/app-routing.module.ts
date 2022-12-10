@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
     path: '',
@@ -13,43 +13,43 @@ const routes: Routes = [
   },
   {
     path: 'sign-up',
-    loadChildren: () => import('./pages/sign-up/sign-up.module').then( m => m.SignUpPageModule)
+    loadChildren: () => import('./pages/sign-up/sign-up.module').then(m => m.SignUpPageModule)
   },
   {
     path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: 'user-home',
-    loadChildren: () => import('./pages/user-home/user-home.module').then( m => m.UserHomePageModule)
+    loadChildren: () => import('./pages/user-home/user-home.module').then(m => m.UserHomePageModule)
   },
   {
     path: 'create-profile',
-    loadChildren: () => import('./pages/create-profile/create-profile.module').then( m => m.CreateProfilePageModule)
+    loadChildren: () => import('./pages/create-profile/create-profile.module').then(m => m.CreateProfilePageModule)
   },
   {
-    path: 'group-view',
-    loadChildren: () => import('./pages/group-view/group-view.module').then( m => m.GroupViewPageModule)
+    path: 'group-view/:id',
+    loadChildren: () => import('./pages/group-view/group-view.module').then(m => m.GroupViewPageModule)
   },
   {
     path: 'person-view',
-    loadChildren: () => import('./pages/person-view/person-view.module').then( m => m.PersonViewPageModule)
+    loadChildren: () => import('./pages/person-view/person-view.module').then(m => m.PersonViewPageModule)
   },
   {
     path: 'edit-profile',
-    loadChildren: () => import('./pages/edit-profile/edit-profile.module').then( m => m.EditProfilePageModule)
+    loadChildren: () => import('./pages/edit-profile/edit-profile.module').then(m => m.EditProfilePageModule)
   },
   {
     path: 'new-group',
-    loadChildren: () => import('./pages/new-group/new-group.module').then( m => m.NewGroupPageModule)
+    loadChildren: () => import('./pages/new-group/new-group.module').then(m => m.NewGroupPageModule)
   },
   {
     path: 'create-group',
-    loadChildren: () => import('./pages/create-group/create-group.module').then( m => m.CreateGroupPageModule)
+    loadChildren: () => import('./pages/create-group/create-group.module').then(m => m.CreateGroupPageModule)
   },
   {
     path: 'join-group',
-    loadChildren: () => import('./pages/join-group/join-group.module').then( m => m.JoinGroupPageModule)
+    loadChildren: () => import('./pages/join-group/join-group.module').then(m => m.JoinGroupPageModule)
   },
 ];
 
