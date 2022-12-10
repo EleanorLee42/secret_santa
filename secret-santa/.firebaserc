@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "secretsanta-f00c5": {
+      "hosting": {
+        "app": [
+          "secretsanta-f00c5"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "secretsanta-f00c5"
+  }
+}

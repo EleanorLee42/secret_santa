@@ -6,7 +6,7 @@
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
-    
+
     <ion-toolbar>
       <ion-title size="large">User Home</ion-title>
     </ion-toolbar>
@@ -16,4 +16,6 @@
     <strong>Welcome home, Claus :)</strong>
 
   </div>
+  <ion-button expand="full" (click)="requestPermission()">Request Permission</ion-button>
+  <ion-button expand="full" (click)="changeDatabase(0)">Send Message</ion-button>
 </ion-content>
