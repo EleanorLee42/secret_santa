@@ -6,14 +6,29 @@ import { environment } from '../../../environments/environment';
 import { AngularFireFunctions } from '@angular/fire/compat/functions';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { AngularFireMessaging } from '@angular/fire/compat/messaging';
+import { ActivatedRoute, Router } from '@angular/router';
+import { filter, throttleTime } from 'rxjs';
+
+interface MiniPerson {
+  Name: string,
+  id: string
+}
 
 interface Group {
+  Name: string,
+  joinCode: string,
+  numPeople: number,
+  id: string,
+  miniPeople: MiniPerson[],
+  date?: Date
+}
+interface MiniGroup {
   GifteeName: string,
   GifteeID: string,
   GroupID: string
 }
 interface Person {
-  Groups: Group[],
+  Groups: MiniGroup[],
   Interests: string,
   Name: string,
   PhoneNumber: string,
@@ -29,42 +44,48 @@ interface Person {
   styleUrls: ['./user-home.page.scss'],
 })
 export class UserHomePage implements OnInit {
-  token: string | undefined | null;
-  private collection: AngularFirestoreCollection<Person> = this.db.collection<Person>('/People');
+  groupID: string;  //Id of current group
+  token: string | undefined | null; //temp - will be moved once authentication is finished
+  private peopleCollection: AngularFirestoreCollection<Person> = this.db.collection<Person>('/People');
   people: Person[] | undefined;
+  // private groupCollection: AngularFirestoreCollection<Group> = this.db.collection<Group>('/Groups');
+  group: Group | undefined; // Current group
   messaging = getMessaging(initializeApp(environment.firebase));
-
 
   constructor(
     private alertCtrl: AlertController,
     private db: AngularFirestore,
-    private afMessaging: AngularFireMessaging
+    private afMessaging: AngularFireMessaging,
+    private route: ActivatedRoute
   ) {
     this.listenForMessages();
+    // this.groupID = this.route.snapshot.paramMap.get('id') //gets groupID from route parameter
+    this.groupID = "ELHEQb5DurQgsSjWplhM";
   }
-  assignPartners = (groupIndex: number) => {
-    let partner: Person;
+  assignPartners = () => {
     //Fisher-Yates shuffle from w3schools
-    for (let i = this.people!.length - 1; i > 0; i--) {
+    let groupPeople = this.group?.miniPeople;
+    for (let i = groupPeople!.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1));
-      let k = this.people![i];
-      this.people![i] = this.people![j];
-      this.people![j] = k;
+      let k = groupPeople![i];
+      groupPeople![i] = groupPeople![j];
+      groupPeople![j] = k;
     }
-    for (let i = 0; i < this.people!.length; i++) {
-      this.people![i].Groups[groupIndex].GifteeID = this.people![(i + 1) % this.people!.length].id;
-      this.people![i].Groups[groupIndex].GifteeName = this.people![(i + 1) % this.people!.length].Name;
+    let peopleIndex: number;
+    let groupIndex: number;
+    for (let i = 0; i < groupPeople!.length; i++) {
+      peopleIndex = this.people!.findIndex((person: Person) => person.id === groupPeople![i].id)
+      groupIndex = this.people![peopleIndex].Groups.findIndex((group: MiniGroup) => group.GroupID === this.group!.id)
+      this.people![peopleIndex].Groups[groupIndex].GifteeID = groupPeople![(i + 1) % groupPeople!.length].id;
+      this.people![peopleIndex].Groups[groupIndex].GifteeName = groupPeople![(i + 1) % groupPeople!.length].Name;
+      this.peopleCollection.doc(this.people![peopleIndex].id).update(this.people![peopleIndex]);
     }
     console.log(this.people);
-    this.people!.forEach(element => {
-      this.collection.doc(element.id).update(element);
-    });
   }
   changeDatabase = (index: number) => {
     let person = this.people![index];
     person.Token = this.token!;
-    // person.Groups[0].GifteeID = person.Groups[0].GifteeID + 1;
-    this.collection.doc(person.id).update(person);
+    this.peopleCollection.doc(person.id).update(person);
 
   }
 
@@ -92,9 +113,26 @@ export class UserHomePage implements OnInit {
   }
 
   ngOnInit() {
-    let peopleSub = this.collection.snapshotChanges().subscribe(result => {
+    let groupDoc = this.db.collection<Group>('/Groups').doc(this.groupID).get();
+    groupDoc.subscribe(result => {
       if (result) {
-        this.people = result.map(doc => {
+        this.group = {
+          Name: result.get("Name"),
+          joinCode: result.get("joinCode"),
+          numPeople: result.get("numPeople"),
+          miniPeople: result.get("people"),
+          id: result.id
+        }
+      }
+    })
+    let ids: string[];
+    this.group?.miniPeople.forEach(element => {
+      ids.push(element.id);
+    });
+
+    let peopleSub = this.peopleCollection.snapshotChanges().subscribe(result => {
+      if (result) {
+        this.people = result.map((doc) => {
           return {
             Groups: doc.payload.doc.data().Groups,
             Interests: doc.payload.doc.data().Interests,
@@ -107,6 +145,8 @@ export class UserHomePage implements OnInit {
         })
       }
     });
+    //list of people in currect group
+    this.people = this.people?.filter(person => ids.includes(person.id));
   }
 
 }
