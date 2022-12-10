@@ -12,7 +12,9 @@
     <div class="my-groups">
       <strong>My groups</strong>
     </div>
-
+    <div *ngFor="let group of groups" routerLink="/group-view/{{group.id}}">
+      {{group.Name}}
+    </div>
     <!--TODO: make this an ngfor display of user's groups-->
     <!--Also make the banner colors alternate-->
     <group-banner></group-banner>
@@ -22,11 +24,9 @@
       <ion-button routerLink="/edit-profile" routerDirection="back">Profile</ion-button>
       <ion-button routerLink="/new-group" id="plus-button" shape="round">+</ion-button>
     </div>
-    
+
   </div>
 
   <ion-button expand="full" (click)="requestPermission()">Request Permission</ion-button>
-  <ion-button expand="full" (click)="assignPartners()">Assign Partners and Send Message</ion-button>
-  <ion-button expand="full" (click)="changeDatabase(0)">temp</ion-button>
-  
+
 </ion-content>
