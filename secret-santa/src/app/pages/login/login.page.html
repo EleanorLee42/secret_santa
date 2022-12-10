@@ -11,12 +11,26 @@
       <ion-back-button defaultHref="/home">Back</ion-back-button>
     </ion-buttons>
     <ion-toolbar>
-      <ion-title size="large">Login</ion-title>
+      <!-- <ion-title size="large">Login</ion-title> -->
     </ion-toolbar>
   </ion-header>
 
+  <!--Container div holds main content-->
   <div id="container">
-    <strong>Here is where you log in!</strong>
-    <ion-button routerLink="/user-home">Done</ion-button>
+    <!--title-div wraps title for display purposes-->
+    <div id="title-div">
+      <strong class="title">welcome back</strong>
+    </div>
+    <!--TODO: make this an ngfor display?-->
+    <ion-item lines="none">
+      <ion-input [clearOnEdit]="true" class="input" 
+      type="email" placeholder="email"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-input [clearOnEdit]="true" class="input"
+      type="password" placeholder="password"></ion-input>
+    </ion-item>
+    
+    <ion-button id="done-btn" routerLink="/user-home">Done</ion-button>
   </div>
 </ion-content>

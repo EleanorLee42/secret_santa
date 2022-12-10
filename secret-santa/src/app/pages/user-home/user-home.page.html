@@ -1,19 +1,27 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>user-home</ion-title>
+<ion-header collapse="condense" class="header ion-padding-vertical">
+
+  <ion-toolbar class="brown-background">
+    <!--TODO: how to get text to wrap??-->
+    <ion-title size="large">Welcome home, Claus :)</ion-title>
   </ion-toolbar>
+
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+  <div class="content">
+    <div class="my-groups">
+      <strong>My groups</strong>
+    </div>
+
+    <!--TODO: make this an ngfor display of user's groups-->
+    <!--Also make the banner colors alternate-->
+    <group-banner></group-banner>
+
+    <div class="foot-div">
+      <!--TODO: add grid to put these in two columns-->
+      <ion-button routerLink="/edit-profile" routerDirection="back">Profile</ion-button>
+      <ion-button routerLink="/new-group" id="plus-button" shape="round">+</ion-button>
+    </div>
     
-    <ion-toolbar>
-      <ion-title size="large">User Home</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Welcome home, Claus :)</strong>
-
   </div>
 </ion-content>

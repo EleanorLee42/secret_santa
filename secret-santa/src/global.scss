@@ -25,7 +25,21 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+// Import Inconsolata font (from Raph Levien, Google Fonts)
+@font-face {
+    font-family: 'Inconsolata';
+    font-style: normal;
+    font-weight: bold;
+    src: url('./assets/fonts/Inconsolata/Inconsolata-VariableFont_wdth,wght.ttf');
+}
+
 // Default styling for ion-content elements
 ion-content {
     --ion-background-color: #FFFCF2;
   }
+
+// Default styling for page titles
+.title {
+    font-family: 'Inconsolata';
+    font-size: 2.5em;
+}

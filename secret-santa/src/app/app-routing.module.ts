@@ -27,6 +27,30 @@ const routes: Routes = [
     path: 'create-profile',
     loadChildren: () => import('./pages/create-profile/create-profile.module').then( m => m.CreateProfilePageModule)
   },
+  {
+    path: 'group-view',
+    loadChildren: () => import('./pages/group-view/group-view.module').then( m => m.GroupViewPageModule)
+  },
+  {
+    path: 'person-view',
+    loadChildren: () => import('./pages/person-view/person-view.module').then( m => m.PersonViewPageModule)
+  },
+  {
+    path: 'edit-profile',
+    loadChildren: () => import('./pages/edit-profile/edit-profile.module').then( m => m.EditProfilePageModule)
+  },
+  {
+    path: 'new-group',
+    loadChildren: () => import('./pages/new-group/new-group.module').then( m => m.NewGroupPageModule)
+  },
+  {
+    path: 'create-group',
+    loadChildren: () => import('./pages/create-group/create-group.module').then( m => m.CreateGroupPageModule)
+  },
+  {
+    path: 'join-group',
+    loadChildren: () => import('./pages/join-group/join-group.module').then( m => m.JoinGroupPageModule)
+  },
 ];
 
 @NgModule({
