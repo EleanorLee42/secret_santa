@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { doc, updateDoc, getFirestore } from 'firebase/firestore';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-profile',
@@ -20,7 +20,8 @@ export class CreateProfilePage implements OnInit {
   constructor(
     private db: AngularFirestore,
     private fb: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
     // getter methods for form inputs
@@ -56,6 +57,9 @@ export class CreateProfilePage implements OnInit {
       PhoneNumber: this?.phone?.value,
       Interests: this?.interests?.value,
     });
+
+    // then go to home page
+    this.router.navigate(['/user-home', this.userId]);
 
   }
 
