@@ -24,16 +24,16 @@ export class CreateProfilePage implements OnInit {
     private router: Router
   ) { }
 
-    // getter methods for form inputs
-    get name() {
-      return this.details.get('name');
-    }
-    get phone() {
-      return this.details.get('phone');
-    }
-    get interests() {
-      return this.details.get('interests');
-    }
+  // getter methods for form inputs
+  get name() {
+    return this.details.get('name');
+  }
+  get phone() {
+    return this.details.get('phone');
+  }
+  get interests() {
+    return this.details.get('interests');
+  }
 
   async ngOnInit() {
     this.userId = String(this.route.snapshot.paramMap.get('id'));
@@ -56,6 +56,7 @@ export class CreateProfilePage implements OnInit {
       Name: this?.name?.value,
       PhoneNumber: this?.phone?.value,
       Interests: this?.interests?.value,
+      Groups: []
     });
 
     // then go to home page

@@ -12,7 +12,7 @@
     <div class="my-groups">
       <strong>My groups</strong>
     </div>
-    <div *ngFor="let group of groups" routerLink="/group-view/{{group.id}}">
+    <div *ngFor="let group of groups" routerLink="/group-view/{{group.id}}/{{userID}}">
       {{group.Name}}
     </div>
     <!--TODO: make this an ngfor display of user's groups-->
@@ -21,8 +21,8 @@
 
     <div class="foot-div">
       <!--TODO: add grid to put these in two columns-->
-      <ion-button routerLink="/edit-profile" routerDirection="back">Profile</ion-button>
-      <ion-button routerLink="/new-group" id="plus-button" shape="round">+</ion-button>
+      <ion-button routerLink="/edit-profile/{{userID}}" routerDirection="back">Profile</ion-button>
+      <ion-button routerLink="/new-group/{{userID}}" id="plus-button" shape="round">+</ion-button>
     </div>
 
   </div>

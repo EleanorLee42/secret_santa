@@ -23,6 +23,8 @@ interface Person {
   styleUrls: ['./person-view.page.scss'],
 })
 export class PersonViewPage implements OnInit {
+  ispartner: boolean;
+  userID: string;
   groupID: string;
   personID: string;
   person: Person;
@@ -31,6 +33,7 @@ export class PersonViewPage implements OnInit {
     private db: AngularFirestore) { }
 
   async ngOnInit() {
+    this.userID = String(this.route.snapshot.paramMap.get('id')); //gets userID from route parameter
     this.personID = String(this.route.snapshot.paramMap.get('id')); //gets personID from route parameter
     this.groupID = String(this.route.snapshot.paramMap.get('gid')); //gets groupID from route parameter
     let personDoc = await this.db.collection<Person>('/People').ref.doc(this.personID).get();
@@ -43,7 +46,18 @@ export class PersonViewPage implements OnInit {
       email: personDoc.get("email"),
       id: personDoc.id
     }
-    let groupIndex = this.person.Groups.findIndex(element => element.GroupID === this.groupID);
+    let userDoc = await this.db.collection<Person>('/People').ref.doc(this.userID).get();
+    let user = {
+      Groups: userDoc.get("Groups"),
+      Interests: userDoc.get("Interests"),
+      Name: userDoc.get("Name"),
+      PhoneNumber: userDoc.get("PhoneNumber"),
+      Token: userDoc.get("Token"),
+      email: userDoc.get("email"),
+      id: userDoc.id
+    }
+    let userGroupIndex = user.Groups.findIndex((element: MiniGroup) => element.GroupID === this.groupID);
+    this.ispartner = (user.Groups[userGroupIndex].GifteeID === this.person.id);
   }
 
 }
