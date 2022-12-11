@@ -1,16 +1,31 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { redirectUnauthorizedTo, redirectLoggedInTo, canActivate } from '@angular/fire/auth-guard';
+
+// unauthorized users redirected to home
+// code from https://devdactic.com/ionic-firebase-auth-upload
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['user-home']);
+// authorized users redirected to user-home
+const redirectLoggedInToHome = () => redirectLoggedInTo(['']);
 
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule),
+    // ...canActivate(redirectUnauthorizedToLogin)
   },
   {
     path: '',
+    // loadChildren: () => import('./home/home.module').then(m => m.HomePageModule),
+    // ...canActivate(redirectLoggedInToHome)
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  // {
+  //   path: '**',
+  //   redirectTo: '',
+  //   pathMatch: 'full'
+  // },
   {
     path: 'sign-up',
     loadChildren: () => import('./pages/sign-up/sign-up.module').then(m => m.SignUpPageModule)
