@@ -6,7 +6,7 @@
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
-    
+
     <ion-buttons>
       <ion-back-button defaultHref="/user-home"></ion-back-button>
     </ion-buttons>
@@ -21,7 +21,8 @@
       <strong class="title">add group</strong>
     </div>
     <!--TODO: make this an ngfor display?-->
-    <ion-button routerLink="/join-group">Join group</ion-button>
-      <ion-button routerLink="/create-group">Create group</ion-button>
+    <ion-button routerLink="/join-group/{{userID}}">Join group</ion-button>
+    <ion-button routerLink="/create-group/{{userID}}">Create group</ion-button>
+    <ion-button routerLink="/user-home/{{userID}}" routerDirection="back">Home</ion-button>
   </div>
 </ion-content>
