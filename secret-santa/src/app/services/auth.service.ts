@@ -6,6 +6,8 @@ import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signO
 })
 export class AuthService {
 
+  // auth service code from https://devdactic.com/ionic-firebase-auth-upload
+
   constructor(private auth: Auth) { }
 
   async loginUser({ email, password}: {email: string, password: string}) {
@@ -32,6 +34,7 @@ export class AuthService {
     return signOut(this.auth);
   }
 
+  // TODO: get reset password working
   // resetPassword(email: string): Promise<void> {
   //   return firebase.auth().sendPasswordResetEmail(email);
   // }

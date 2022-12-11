@@ -28,6 +28,7 @@
         [clearOnEdit]="true" placeholder="email"
         formControlName="email" required></ion-input>
       </ion-item>
+      <!--TODO: add notes abt. invalid inputs-->
 
       <ion-item lines="none">
         <ion-input class="input" type="password"
@@ -40,18 +41,11 @@
         [clearOnEdit]="true" placeholder="confirm password"
         formControlName="confirm_pw" required></ion-input>
       </ion-item> -->
+      <!--TODO: figure out confirm password-->
 
       <ion-button id="done-btn" type="submit" [disabled]="!info.valid">Done</ion-button>
 
     </form>
-
-    <!--TODO: make this an ngfor display?-->
-    
-    
-    
-
-    <!-- <ion-button id="done-btn" routerLink="/create-profile" (click)="doneClicked()">Done</ion-button> -->
-    
 
   </div>
 </ion-content>

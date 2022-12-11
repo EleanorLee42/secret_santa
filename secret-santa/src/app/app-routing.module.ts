@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { redirectUnauthorizedTo, redirectLoggedInTo, canActivate } from '@angular/fire/auth-guard';
 
+// TODO: figure out auth guards (code as is was doing smthn funky)
 // unauthorized users redirected to home
 // code from https://devdactic.com/ionic-firebase-auth-upload
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['user-home']);
@@ -35,11 +36,16 @@ const routes: Routes = [
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
   },
   {
-    path: 'user-home',
+    // path: 'user-home',
+    path: 'user-home/:id',
     loadChildren: () => import('./pages/user-home/user-home.module').then(m => m.UserHomePageModule)
   },
+  // {
+  //   path: 'create-profile',
+  //   loadChildren: () => import('./pages/create-profile/create-profile.module').then(m => m.CreateProfilePageModule)
+  // },
   {
-    path: 'create-profile',
+    path: 'create-profile/:id',
     loadChildren: () => import('./pages/create-profile/create-profile.module').then(m => m.CreateProfilePageModule)
   },
   {
