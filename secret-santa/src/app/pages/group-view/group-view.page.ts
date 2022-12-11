@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 import { getMessaging } from "firebase/messaging";
 import { initializeApp } from "firebase/app";
 import { environment } from '../../../environments/environment';
-import { AngularFirestore, AngularFirestoreCollection, fromCollectionRef } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { AngularFireMessaging } from '@angular/fire/compat/messaging';
-import { ActivatedRoute, Router } from '@angular/router';
-import { getDefaultCompilerOptions, getDefaultFormatCodeSettings } from 'typescript';
-import { getDocs, collection } from 'firebase/firestore'
+import { ActivatedRoute } from '@angular/router';
+import { Timestamp } from 'firebase/firestore';
 
 interface MiniPerson {
   Name: string,
@@ -20,7 +19,8 @@ interface Group {
   numPeople: number,
   id: string,
   miniPeople: MiniPerson[],
-  date?: Date
+  date?: string,
+  description: string,
 }
 interface MiniGroup {
   GifteeName: string,
@@ -51,54 +51,29 @@ export class GroupViewPage implements OnInit {
   group: Group; // Current group
   messaging = getMessaging(initializeApp(environment.firebase));
 
-  constructor(private alertCtrl: AlertController,
+  constructor(private toastCtrl: ToastController,
     private db: AngularFirestore,
     private afMessaging: AngularFireMessaging,
     private route: ActivatedRoute) {
     this.listenForMessages();
   }
 
-  // getgroupData = async () => {
-  //   let groupDoc = await this.db.collection<Group>('/Groups').ref.doc(this.groupID).get();
-  //   return {
-  //     Name: groupDoc.get("Name"),
-  //     joinCode: groupDoc.get("joinCode"),
-  //     numPeople: groupDoc.get("numPeople"),
-  //     miniPeople: groupDoc.get("People"),
-  //     id: groupDoc.id
-  //   }
-  // }
-  // getIds = async (group: Group): Promise<string[]> => {
-  //   console.log(group);
-  //   console.log(group.miniPeople);
-  //   let ids: string[] = [];
-  //   group.miniPeople.forEach(element => {
-  //     ids.push(element.id);
-  //   });
-  //   console.log(ids);
-  //   return ids;
-  // }
-
   async ngOnInit() {
     this.groupID = String(this.route.snapshot.paramMap.get('id')); //gets groupID from route parameter
-    // console.log(this.groupID);
-    // let groupDoc = await this.db.collection<Group>('/Groups').ref.doc(this.groupID).get();
-    // let group1 = await this.getgroupData();
     let groupDoc = await this.db.collection<Group>('/Groups').ref.doc(this.groupID).get();
     this.group = {
       Name: groupDoc.get("Name"),
       joinCode: groupDoc.get("joinCode"),
       numPeople: groupDoc.get("numPeople"),
       miniPeople: groupDoc.get("People"),
+      description: groupDoc.get("description"),
+      date: groupDoc.get("date").toDate().toLocaleString(),
       id: groupDoc.id
     }
-    // const ids: string[] = await this.getIds(this.group);
     let ids: string[] = [];
-    // console.log(this.group.miniPeople);
     this.group.miniPeople.forEach(element => {
       ids.push(element.id);
     });
-    // console.log(ids);
 
     let peopleSnap = await this.db.collection("/People").ref.get();
     this.people = peopleSnap.docs.map((doc) => {
@@ -117,7 +92,6 @@ export class GroupViewPage implements OnInit {
   }
 
   assignPartners = () => {
-    console.log(this.people);
     //Fisher-Yates shuffle from w3schools
     let groupPeople = this.group.miniPeople;
     for (let i = groupPeople.length - 1; i > 0; i--) {
@@ -130,27 +104,27 @@ export class GroupViewPage implements OnInit {
     let groupIndex: number;
     for (let i = 0; i < groupPeople!.length; i++) {
       peopleIndex = this.people.findIndex((person: Person) => person.id === groupPeople[i].id)
-      console.log(this.group.id);
       groupIndex = this.people[peopleIndex].Groups.findIndex((group: MiniGroup) => group.GroupID === this.group.id)
-      console.log("i is: " + i + "and the thing is: ");
-      console.log(groupIndex);
-      console.log(this.people[peopleIndex].Groups);
       this.people[peopleIndex].Groups[groupIndex].GifteeID = groupPeople[(i + 1) % groupPeople.length].id;
       this.people[peopleIndex].Groups[groupIndex].GifteeName = groupPeople[(i + 1) % groupPeople.length].Name;
       this.peopleCollection.doc(this.people![peopleIndex].id).update(this.people![peopleIndex]);
     }
-    console.log(this.people);
   }
 
   listenForMessages = async () => {
     this.afMessaging.messages.subscribe(async (msg: any) => {
-      const alert = await this.alertCtrl.create({
+      const toast = await this.toastCtrl.create({
         header: msg.notification.title,
-        subHeader: msg.notification.body,
-        buttons: ['OK'],
+        message: msg.notification.body,
+        buttons: [
+          {
+            text: 'Ok',
+            role: 'cancel',
+          }
+        ]
       });
 
-      await alert.present();
+      await toast.present();
     });
   }
 
