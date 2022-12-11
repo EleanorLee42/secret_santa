@@ -49,27 +49,27 @@ const routes: Routes = [
     loadChildren: () => import('./pages/create-profile/create-profile.module').then(m => m.CreateProfilePageModule)
   },
   {
-    path: 'group-view/:id/:uid',
+    path: 'group-view/:id',
     loadChildren: () => import('./pages/group-view/group-view.module').then(m => m.GroupViewPageModule)
   },
   {
-    path: 'person-view/:id/:gid/:uid',
+    path: 'person-view/:id/:gid',
     loadChildren: () => import('./pages/person-view/person-view.module').then(m => m.PersonViewPageModule)
   },
   {
-    path: 'edit-profile/:id',
+    path: 'edit-profile',
     loadChildren: () => import('./pages/edit-profile/edit-profile.module').then(m => m.EditProfilePageModule)
   },
   {
-    path: 'new-group/:id',
+    path: 'new-group',
     loadChildren: () => import('./pages/new-group/new-group.module').then(m => m.NewGroupPageModule)
   },
   {
-    path: 'create-group/:id',
+    path: 'create-group',
     loadChildren: () => import('./pages/create-group/create-group.module').then(m => m.CreateGroupPageModule)
   },
   {
-    path: 'join-group/:id',
+    path: 'join-group',
     loadChildren: () => import('./pages/join-group/join-group.module').then(m => m.JoinGroupPageModule)
   },
 ];

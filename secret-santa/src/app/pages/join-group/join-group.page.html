@@ -6,7 +6,7 @@
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
-
+    
     <ion-buttons>
       <ion-back-button defaultHref="/home">Back</ion-back-button>
     </ion-buttons>
@@ -21,11 +21,12 @@
       <strong class="title">join a group!</strong>
     </div>
     <ion-item lines="none">
-      <ion-input [clearOnEdit]="true" class="input" placeholder="group code" [(ngModel)]="code"></ion-input>
+      <ion-input [clearOnEdit]="true" class="input" 
+                  placeholder="group code"></ion-input>
     </ion-item>
-
+    
     <!--TODO: use grid to get these on same line-->
-    <ion-button id="done-btn" (click)="joinGroup()">Done</ion-button>
-    <ion-button id="cancel-btn" routerLink="/user-home/{{userID}}" routerDirection="back">Cancel</ion-button>
+    <ion-button id="done-btn" routerLink="/group-view">Done</ion-button>
+    <ion-button id="cancel-btn" routerLink="/user-home" routerDirection="back">Cancel</ion-button>
   </div>
 </ion-content>
