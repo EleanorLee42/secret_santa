@@ -1,26 +1,25 @@
-<ion-header collapse="condense" class="header ion-padding-vertical">
-  
+<ion-header class="header ion-padding-vertical">
+
   <!--TODO: make group color variable? Or store it in db somehow?-->
   <ion-toolbar class="red-background">
     <!--TODO: how to get text to wrap??-->
-    <ion-title size="large">Bob</ion-title>
+    <ion-title size="large">{{person?.Name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
   <!--TODO: make this conditional on ngIf... if person is the user's giftee-->
-  <div class="giftee-div"> 
+  <div class="giftee-div">
     <ion-icon name="star"></ion-icon>
     <p class="giftee-msg">Get this tiny tot a gift!</p>
   </div>
 
-  <div class="content group-name">Group: The test group</div>
-  <div class="content likes">Likes: simple mugs, fishing, pogo sticks</div>
-  <div class="content phone">Phone: 555-555-5555</div>
+  <div class="content likes">Likes: {{person?.Interests}}</div>
+  <div class="content phone">Phone: {{person?.PhoneNumber}}</div>
 
   <div class="foot-div">
     <!--TODO: can the animation here go backwards?-->
-    <ion-button routerLink="/group-view" routerDirection="back">Done</ion-button>
+    <ion-button routerLink="/group-view/{{groupID}}" routerDirection="back">Done</ion-button>
   </div>
 </ion-content>

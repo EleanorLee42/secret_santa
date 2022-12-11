@@ -32,7 +32,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/group-view/group-view.module').then(m => m.GroupViewPageModule)
   },
   {
-    path: 'person-view',
+    path: 'person-view/:id/:gid',
     loadChildren: () => import('./pages/person-view/person-view.module').then(m => m.PersonViewPageModule)
   },
   {

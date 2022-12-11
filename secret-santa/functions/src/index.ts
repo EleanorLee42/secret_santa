@@ -14,7 +14,7 @@ exports.docChange = functions.firestore.document("People/{docId}").onUpdate(asyn
         token: token,
         notification: {
           title: 'Come meet your giftee!',
-          body: "You got matched with " + person.Groups[i].GifteeName
+          body: "You got matched with " + person.Groups[i].GifteeName + "in group " + person.Groups[i].Name
         },
         android: {
           notification: {
