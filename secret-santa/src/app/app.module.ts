@@ -9,7 +9,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 // import { provideAuth, getAuth } from '@angular/fire/auth';
-// import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { AngularFireModule } from '@angular/fire/compat';
@@ -18,11 +17,17 @@ import { AngularFireModule } from '@angular/fire/compat';
 // import { provideMessaging,getMessaging } from '@angular/fire/messaging';
 import { AngularFireFunctionsModule } from '@angular/fire/compat/functions';
 
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { provideStorage, getStorage } from '@angular/fire/storage';
+
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
+  imports: [
+    BrowserModule, 
+    IonicModule.forRoot(), 
+    AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
-    // provideAuth(() => getAuth()),
     // provideFirestore(() => getFirestore()),
     AngularFireMessagingModule,
     ServiceWorkerModule.register('combined-sw.js', {
@@ -32,7 +37,13 @@ import { AngularFireFunctionsModule } from '@angular/fire/compat/functions';
     // provideFirestore(() => getFirestore()),
     // provideFunctions(() => getFunctions()),
     // provideMessaging(() => getMessaging())
-    AngularFireFunctionsModule
+    AngularFireFunctionsModule,
+
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage()),
+    
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

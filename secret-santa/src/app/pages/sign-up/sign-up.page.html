@@ -12,8 +12,6 @@
       <ion-back-button defaultHref="/home">Back</ion-back-button>
     </ion-buttons>
     <ion-toolbar>
-      <!-- Just page title for now
-      <ion-title size="large">Sign up</ion-title> -->
     </ion-toolbar>
   </ion-header>
 
@@ -24,21 +22,30 @@
       <strong class="title">create account</strong>
     </div>
 
-    <!--TODO: make this an ngfor display?-->
-    <ion-item lines="none">
-      <ion-input class="input" type="email"
-      [clearOnEdit]="true" placeholder="email"></ion-input>
-    </ion-item>
-    <ion-item lines="none">
-      <ion-input class="input" type="password"
-      [clearOnEdit]="true" placeholder="password"></ion-input>
-    </ion-item>
-    <ion-item lines="none">
-      <ion-input class="input" type="password"
-      [clearOnEdit]="true" placeholder="confirm password"></ion-input>
-    </ion-item>
+    <form (ngSubmit)="signUp()" [formGroup]="info">
+      <ion-item lines="none">
+        <ion-input class="input" type="email"
+        [clearOnEdit]="true" placeholder="email"
+        formControlName="email" required></ion-input>
+      </ion-item>
+      <!--TODO: add notes abt. invalid inputs-->
 
-    <ion-button id="done-btn" routerLink="/create-profile">Done</ion-button>
+      <ion-item lines="none">
+        <ion-input class="input" type="password"
+        [clearOnEdit]="true" placeholder="password"
+        formControlName="password" required></ion-input>
+      </ion-item>
+
+      <!-- <ion-item lines="none">
+        <ion-input class="input" type="password"
+        [clearOnEdit]="true" placeholder="confirm password"
+        formControlName="confirm_pw" required></ion-input>
+      </ion-item> -->
+      <!--TODO: figure out confirm password-->
+
+      <ion-button id="done-btn" type="submit" [disabled]="!info.valid">Done</ion-button>
+
+    </form>
 
   </div>
 </ion-content>
