@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireMessaging } from '@angular/fire/compat/messaging';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { updateCurrentUser } from 'firebase/auth';
 
 interface MiniPerson {
@@ -46,10 +47,30 @@ export class JoinGroupPage implements OnInit {
   constructor(private db: AngularFirestore,
     private alertCtrl: AlertController,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private afMessaging: AngularFireMessaging,
+    private toastCtrl: ToastController) { this.listenForMessages(); }
 
   ngOnInit() {
     this.userID = String(this.route.snapshot.paramMap.get('id')); //gets userID from route parameter
+  }
+
+  listenForMessages = async () => {
+    // Based on https://devdactic.com/ionic-pwa-web-push
+    this.afMessaging.messages.subscribe(async (msg: any) => {
+      const toast = await this.toastCtrl.create({
+        header: msg.notification.title,
+        message: msg.notification.body,
+        buttons: [
+          {
+            text: 'Ok',
+            role: 'cancel',
+          }
+        ]
+      });
+
+      await toast.present();
+    });
   }
 
   async joinGroup() {

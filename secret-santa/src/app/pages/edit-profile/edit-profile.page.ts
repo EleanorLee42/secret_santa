@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireMessaging } from '@angular/fire/compat/messaging';
 import { ActivatedRoute } from '@angular/router';
-import { IonInput, IonItem, IonItemSliding } from '@ionic/angular';
-import { createInputFiles } from 'typescript';
+import { ToastController } from '@ionic/angular';
 
 interface MiniGroup {
   GifteeName: string,
@@ -32,7 +32,12 @@ export class EditProfilePage implements OnInit {
   newPhone: string;
 
   constructor(private route: ActivatedRoute,
-    private db: AngularFirestore) { this.getUser() }
+    private db: AngularFirestore,
+    private afMessaging: AngularFireMessaging,
+    private toastCtrl: ToastController) {
+    this.getUser();
+    this.listenForMessages();
+  }
 
   async getUser() {
     this.userID = String(this.route.snapshot.paramMap.get('id')); //gets userID from route parameter
@@ -58,6 +63,23 @@ export class EditProfilePage implements OnInit {
     this.user.Interests = this.newInterests;
     this.user.PhoneNumber = this.newPhone;
     this.db.collection<Person>('/People').doc(this.userID).update(this.user);
+  }
+  listenForMessages = async () => {
+    // Based on https://devdactic.com/ionic-pwa-web-push
+    this.afMessaging.messages.subscribe(async (msg: any) => {
+      const toast = await this.toastCtrl.create({
+        header: msg.notification.title,
+        message: msg.notification.body,
+        buttons: [
+          {
+            text: 'Ok',
+            role: 'cancel',
+          }
+        ]
+      });
+
+      await toast.present();
+    });
   }
 
   focus() {

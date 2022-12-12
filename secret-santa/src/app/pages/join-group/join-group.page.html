@@ -8,7 +8,7 @@
   <ion-header collapse="condense">
 
     <ion-buttons>
-      <ion-back-button defaultHref="/home">Back</ion-back-button>
+      <ion-back-button defaultHref="/new-group/{{userID}}">Back</ion-back-button>
     </ion-buttons>
     <ion-toolbar>
     </ion-toolbar>
@@ -25,7 +25,10 @@
     </ion-item>
 
     <!--TODO: use grid to get these on same line-->
-    <ion-button id="done-btn" (click)="joinGroup()">Done</ion-button>
-    <ion-button id="cancel-btn" routerLink="/user-home/{{userID}}" routerDirection="back">Cancel</ion-button>
+    <div id="button-div">
+      <ion-button id="cancel-btn" routerLink="/user-home/{{userID}}" 
+      routerDirection="back">Cancel</ion-button>
+      <ion-button id="done-btn" (click)="joinGroup()">Done</ion-button>
+    </div>
   </div>
 </ion-content>

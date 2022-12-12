@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { AngularFireMessaging } from '@angular/fire/compat/messaging';
-import { ActivatedRoute } from '@angular/router';
+import { ToastController } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 interface MiniPerson {
   Name: string,
@@ -47,10 +49,18 @@ export class UserHomePage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private afMessaging: AngularFireMessaging,
+    private authService: AuthService,
     private db: AngularFirestore,
+    private toastCtrl: ToastController,
+    private router: Router,
   ) {
     this.requestPermission();
-    // this.listenForMessages();
+    this.listenForMessages();
+  }
+
+  async logout() {
+    await this.authService.logoutUser();
+    this.router.navigateByUrl('/', { replaceUrl: true });
   }
 
   requestPermission() {
@@ -100,6 +110,24 @@ export class UserHomePage implements OnInit {
       };
     });
     this.groups = this.groups.filter((group: Group) => groupIds.includes(group.id))
+  }
+
+  listenForMessages = async () => {
+    // Based on https://devdactic.com/ionic-pwa-web-push
+    this.afMessaging.messages.subscribe(async (msg: any) => {
+      const toast = await this.toastCtrl.create({
+        header: msg.notification.title,
+        message: msg.notification.body,
+        buttons: [
+          {
+            text: 'Ok',
+            role: 'cancel',
+          }
+        ]
+      });
+
+      await toast.present();
+    });
   }
 
 }

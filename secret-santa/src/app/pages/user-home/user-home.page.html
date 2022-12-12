@@ -21,9 +21,9 @@
     <!-- <group-banner groupID={{group.id}} userID={{userID}}></group-banner> -->
 
     <div class="foot-div">
-      <!--TODO: add grid to put these in two columns-->
       <ion-button routerLink="/edit-profile/{{userID}}" routerDirection="back">Profile</ion-button>
       <ion-button routerLink="/new-group/{{userID}}" id="plus-button" shape="round">+</ion-button>
+      <ion-button (click)="logout()">Logout</ion-button>
     </div>
 
   </div>
