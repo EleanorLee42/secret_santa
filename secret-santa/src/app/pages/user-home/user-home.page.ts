@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { AngularFireMessaging } from '@angular/fire/compat/messaging';
-import { ActivatedRoute } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 interface MiniPerson {
   Name: string,
@@ -48,11 +49,18 @@ export class UserHomePage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private afMessaging: AngularFireMessaging,
+    private authService: AuthService,
     private db: AngularFirestore,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private router: Router,
   ) {
     this.requestPermission();
     this.listenForMessages();
+  }
+
+  async logout() {
+    await this.authService.logoutUser();
+    this.router.navigateByUrl('/', { replaceUrl: true });
   }
 
   requestPermission() {

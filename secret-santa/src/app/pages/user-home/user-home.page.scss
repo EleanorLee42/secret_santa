@@ -10,8 +10,12 @@
 
 // keep profile, new group buttons at bottom of page
 .foot-div {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
     position: fixed;
     bottom: 0%;
+    width: 95%;
 }
 
 // class for styling page header
