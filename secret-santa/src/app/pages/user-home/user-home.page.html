@@ -12,9 +12,9 @@
     <div class="my-groups">
       <strong>My groups</strong>
     </div>
-    <div *ngFor="let group of groups" routerLink="/group-view/{{group.id}}/{{userID}}">
-      <group-banner groupName={{group.Name}} [gifteeName]=gifteeName(group.id)
-        exchangeDate={{group.date}}></group-banner>
+    <div *ngFor="let group of groups">
+      <group-banner groupName={{group.Name}} [gifteeName]=gifteeName(group.id) exchangeDate={{group.date}}
+        routerLink="/group-view/{{group.id}}/{{userID}}"></group-banner>
     </div>
     <!--TODO: make this an ngfor display of user's groups-->
     <!--Also make the banner colors alternate-->

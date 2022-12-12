@@ -10,22 +10,23 @@ exports.docChange = functions.firestore.document("People/{docId}").onUpdate(asyn
 
   for (let i = 0; i < person.Groups.length; i++) {
     if (person.Groups[i].GifteeID !== "" && oldPerson.Groups[i].GifteeID === "" && person.Token) {
-      let groupDoc = await admin.firestore.collection('/Group').doc(person.Groups.GroupID).get();
+      let db = admin.firestore();
+      let groupDoc = db.collection('/Groups').doc(person.Groups[i].GroupID);
+      const doc = await groupDoc.get();
       let group = {
-        Groups: groupDoc.get("Groups"),
-        Interests: groupDoc.get("Interests"),
-        Name: groupDoc.get("Name"),
-        PhoneNumber: groupDoc.get("PhoneNumber"),
-        Token: groupDoc.get("Token"),
-        email: groupDoc.get("email"),
-        id: groupDoc.id
+        Groups: doc.get("Groups"),
+        Interests: doc.get("Interests"),
+        Name: doc.get("Name"),
+        PhoneNumber: doc.get("PhoneNumber"),
+        Token: doc.get("Token"),
+        email: doc.get("email"),
+        id: doc.id
       }
-      let token: string = person.Token;
       const message = {
-        token: token,
+        token: person.Token,
         notification: {
           title: 'Come meet your giftee!',
-          body: "You got matched with " + person.Groups[i].GifteeName + " in group " + group.Name
+          body: "You got matched with " + person.Groups[i].GifteeName + " in the group: " + group.Name
         },
         android: {
           notification: {
