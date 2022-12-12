@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-new-group',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./new-group.page.scss'],
 })
 export class NewGroupPage implements OnInit {
+  userID: string;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.userID = String(this.route.snapshot.paramMap.get('id')); //gets userID from route parameter
   }
 
 }
