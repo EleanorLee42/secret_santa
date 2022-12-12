@@ -7,7 +7,7 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-buttons>
-      <ion-back-button defaultHref="/new-group"></ion-back-button>
+      <ion-back-button defaultHref="/new-group/{{userID}}"></ion-back-button>
     </ion-buttons>
     <ion-toolbar>
     </ion-toolbar>
@@ -42,10 +42,12 @@
           [(ngModel)]="groupDescription" required></ion-textarea>
       </ion-item>
 
-      <ion-button type="submit" [disabled]="!ngForm.valid">Done</ion-button>
+      <div id="button-div">
+        <ion-button id="cancel-btn" routerLink="/user-home/{{userID}}" 
+        routerDirection="back">Cancel</ion-button>
+        <ion-button type="submit" [disabled]="!ngForm.valid">Done</ion-button>
+      </div>
     </form>
-
-    <ion-button id="cancel-btn" routerLink="/user-home/{{userID}}" routerDirection="back">Cancel</ion-button>
 
   </div>
 </ion-content>
