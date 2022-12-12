@@ -19,22 +19,33 @@
       <strong class="title">start a group</strong>
     </div>
 
-    <!--TODO: make this an ngfor display?-->
-    <ion-item lines="none">
-      <ion-input class="input"[clearOnEdit]="true" placeholder="group name"></ion-input>
-    </ion-item>
-    <ion-item lines="none">
-      <ion-input class="input" type="tel" [clearOnEdit]="true" placeholder="exchange date"></ion-input>
-    </ion-item>
-    <ion-item lines="none">
-      <ion-input class="input" type="tel" [clearOnEdit]="true" placeholder="number of people (optional)"></ion-input>
-    </ion-item>
-    <ion-item lines="none">
-      <ion-textarea class="input" [clearOnEdit]="true" placeholder="group description"></ion-textarea>
-    </ion-item>
 
-    <ion-button routerLink="/user-home">Done</ion-button>
-    <ion-button id="cancel-btn" routerLink="/user-home" routerDirection="back">Cancel</ion-button>
+    <form (ngSubmit)="makeGroup()" #f="ngForm">
+      <ion-item lines="none">
+        <ion-input class="input" [clearOnEdit]="true" placeholder="group name" name="name" [(ngModel)]="groupName"
+          required></ion-input>
+      </ion-item>
+
+      <ion-datetime-button datetime="datetime"></ion-datetime-button>
+      <ion-modal [keepContentsMounted]="true" name="modal">
+        <ng-template>
+          <ion-datetime id="datetime" min="{{currentDate}}" name="date" [(ngModel)]="groupDate" required></ion-datetime>
+        </ng-template>
+      </ion-modal>
+
+      <ion-item lines="none">
+        <ion-input class="input" type="tel" [clearOnEdit]="true" placeholder="max number of people" name="numPeople"
+          [(ngModel)]="numPeople" reqired></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-textarea class="input" [clearOnEdit]="true" placeholder="group description" name="description"
+          [(ngModel)]="groupDescription" required></ion-textarea>
+      </ion-item>
+
+      <ion-button type="submit" [disabled]="!ngForm.valid">Done</ion-button>
+    </form>
+
+    <ion-button id="cancel-btn" routerLink="/user-home/{{userID}}" routerDirection="back">Cancel</ion-button>
 
   </div>
 </ion-content>

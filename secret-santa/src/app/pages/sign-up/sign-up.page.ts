@@ -51,7 +51,7 @@ export class SignUpPage implements OnInit {
 
   // called from signUp()
   // makes doc for new Person in People collection
-  async makeNewPerson () {
+  async makeNewPerson() {
     let personRef = this.db.collection('People').ref.doc();
     this.docId = personRef.id;  // save doc id to pass into URL later
 
@@ -59,6 +59,7 @@ export class SignUpPage implements OnInit {
       // form does validation checks for us -- these won't be null
       email: this?.email?.value,
       password: this?.password?.value,
+      Groups: [],
     }
     // create new doc w/ set id
     await setDoc(doc(this.db2, "People", this.docId), newPerson);

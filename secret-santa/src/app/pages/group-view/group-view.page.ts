@@ -18,7 +18,7 @@ interface Group {
   joinCode: string,
   numPeople: number,
   id: string,
-  miniPeople: MiniPerson[],
+  People: MiniPerson[],
   date?: string,
   description: string,
 }
@@ -44,12 +44,15 @@ interface Person {
   styleUrls: ['./group-view.page.scss'],
 })
 export class GroupViewPage implements OnInit {
-  groupID!: string;  //Id of current group
+  groupID: string;  //Id of current group
+  user: Person;
+  userID: string;
   private peopleCollection: AngularFirestoreCollection<Person> = this.db.collection<Person>('/People');
   people: Person[];
   // private groupCollection: AngularFirestoreCollection<Group> = this.db.collection<Group>('/Groups');
   group: Group; // Current group
   messaging = getMessaging(initializeApp(environment.firebase));
+  userGroupIndex: number;
 
   constructor(private toastCtrl: ToastController,
     private db: AngularFirestore,
@@ -59,19 +62,32 @@ export class GroupViewPage implements OnInit {
   }
 
   async ngOnInit() {
+    this.userID = String(this.route.snapshot.paramMap.get('uid')); //gets userID from route parameter
+    console.count(this.userID);
     this.groupID = String(this.route.snapshot.paramMap.get('id')); //gets groupID from route parameter
+    let userDoc = await this.db.collection<Person>('/People').ref.doc(this.userID).get();
+    this.user = {
+      Groups: userDoc.get("Groups"),
+      Interests: userDoc.get("Interests"),
+      Name: userDoc.get("Name"),
+      PhoneNumber: userDoc.get("PhoneNumber"),
+      Token: userDoc.get("Token"),
+      email: userDoc.get("email"),
+      id: userDoc.id
+    }
+    this.userGroupIndex = this.user.Groups.findIndex((group: MiniGroup) => group.GroupID === this.groupID)
     let groupDoc = await this.db.collection<Group>('/Groups').ref.doc(this.groupID).get();
     this.group = {
       Name: groupDoc.get("Name"),
       joinCode: groupDoc.get("joinCode"),
       numPeople: groupDoc.get("numPeople"),
-      miniPeople: groupDoc.get("People"),
+      People: groupDoc.get("People"),
       description: groupDoc.get("description"),
-      date: groupDoc.get("date").toDate().toLocaleString(),
+      date: groupDoc.get("date"),
       id: groupDoc.id
     }
     let ids: string[] = [];
-    this.group.miniPeople.forEach(element => {
+    this.group.People.forEach(element => {
       ids.push(element.id);
     });
 
@@ -93,7 +109,7 @@ export class GroupViewPage implements OnInit {
 
   assignPartners = () => {
     //Fisher-Yates shuffle from w3schools
-    let groupPeople = this.group.miniPeople;
+    let groupPeople = this.group.People;
     for (let i = groupPeople.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1));
       let k = groupPeople![i];
