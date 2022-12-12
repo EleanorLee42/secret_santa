@@ -10,10 +10,10 @@
 <button class="button" routerLink="/group-view">
   <div class="button-content">
     <!--TODO: make text variables passed in from parent-->
-    <span id="group-name">Group name here</span>
+    <span id="group-name">{{groupName}}</span>
     <span id="button-subcontent"> <!--I think we'll need a grid here...-->
-      <div id="giftee">Gift for: Bob</div>
-      <div id="exchange-date">Exchange: Dec 24, 2022</div>
+      <div id="giftee" *ngIf="gifteeName">Gift for: {{gifteeName}}</div>
+      <div id="exchange-date">Exchange: {{exchangeDate}}</div>
     </span>
   </div>
 </button>

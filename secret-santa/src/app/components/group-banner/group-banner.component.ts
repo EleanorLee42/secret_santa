@@ -1,14 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'group-banner',
   templateUrl: './group-banner.component.html',
   styleUrls: ['./group-banner.component.scss'],
 })
-export class GroupBannerComponent implements OnInit {
+export class GroupBannerComponent {
+  @Input() groupName: string;
+  @Input() gifteeName: string;
+  @Input() exchangeDate: string;
 
-  constructor() { }
+  constructor(private db: AngularFirestore,) {
 
-  ngOnInit() {}
+  }
 
 }

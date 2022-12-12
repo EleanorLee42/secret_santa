@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AngularFireMessaging } from '@angular/fire/compat/messaging';
+import { ToastController } from '@ionic/angular';
 
 interface MiniPerson {
   Name: string,
@@ -51,10 +53,13 @@ export class CreateGroupPage implements OnInit {
   constructor(private route: ActivatedRoute,
     private router: Router,
     private db: AngularFirestore,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private afMessaging: AngularFireMessaging,
+    private toastCtrl: ToastController) {
     this.ngForm = this.formBuilder.group({
       ngForm: ['']
     });
+    this.listenForMessages();
   }
 
   async getGroups() {
@@ -108,18 +113,36 @@ export class CreateGroupPage implements OnInit {
     while (this.checkCode(code)) {
       code = this.getCode();
     }
+    let groupDateString = new Date(this.groupDate).toLocaleString();
     let newGroup: Group = {
       Name: this.groupName,
       joinCode: code,
       numPeople: Number(this.numPeople),
       People: [{ Name: this.user.Name, id: this.user.id }],
-      date: this.groupDate,
+      date: groupDateString,
       description: this.groupDescription,
     }
     let newDoc = await this.db.collection<Group>('/Groups').add(newGroup);
     this.user.Groups.push({ GifteeName: "", GifteeID: "", GroupID: newDoc.id });
     this.db.collection<Person>('/People').doc(this.userID).update(this.user);
     this.router.navigate(['/group-view', newDoc.id, this.userID]);
+  }
+  listenForMessages = async () => {
+    // Based on https://devdactic.com/ionic-pwa-web-push
+    this.afMessaging.messages.subscribe(async (msg: any) => {
+      const toast = await this.toastCtrl.create({
+        header: msg.notification.title,
+        message: msg.notification.body,
+        buttons: [
+          {
+            text: 'Ok',
+            role: 'cancel',
+          }
+        ]
+      });
+
+      await toast.present();
+    });
   }
 
 }

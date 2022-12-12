@@ -49,7 +49,6 @@ export class GroupViewPage implements OnInit {
   userID: string;
   private peopleCollection: AngularFirestoreCollection<Person> = this.db.collection<Person>('/People');
   people: Person[];
-  // private groupCollection: AngularFirestoreCollection<Group> = this.db.collection<Group>('/Groups');
   group: Group; // Current group
   messaging = getMessaging(initializeApp(environment.firebase));
   userGroupIndex: number;
@@ -75,6 +74,7 @@ export class GroupViewPage implements OnInit {
       email: userDoc.get("email"),
       id: userDoc.id
     }
+    let dateFormatting = { weekday: "long", year: "numeric", month: "short", day: "numeric", hour: "numeric", minute: "numeric" } as const;
     this.userGroupIndex = this.user.Groups.findIndex((group: MiniGroup) => group.GroupID === this.groupID)
     let groupDoc = await this.db.collection<Group>('/Groups').ref.doc(this.groupID).get();
     this.group = {
@@ -83,7 +83,7 @@ export class GroupViewPage implements OnInit {
       numPeople: groupDoc.get("numPeople"),
       People: groupDoc.get("People"),
       description: groupDoc.get("description"),
-      date: groupDoc.get("date"),
+      date: new Date(groupDoc.get("date")).toLocaleString('en-US', dateFormatting),
       id: groupDoc.id
     }
     let ids: string[] = [];
@@ -128,6 +128,7 @@ export class GroupViewPage implements OnInit {
   }
 
   listenForMessages = async () => {
+    // Based on https://devdactic.com/ionic-pwa-web-push
     this.afMessaging.messages.subscribe(async (msg: any) => {
       const toast = await this.toastCtrl.create({
         header: msg.notification.title,

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireMessaging } from '@angular/fire/compat/messaging';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { updateCurrentUser } from 'firebase/auth';
 
 interface MiniPerson {
@@ -46,10 +47,30 @@ export class JoinGroupPage implements OnInit {
   constructor(private db: AngularFirestore,
     private alertCtrl: AlertController,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private afMessaging: AngularFireMessaging,
+    private toastCtrl: ToastController) { this.listenForMessages(); }
 
   ngOnInit() {
     this.userID = String(this.route.snapshot.paramMap.get('id')); //gets userID from route parameter
+  }
+
+  listenForMessages = async () => {
+    // Based on https://devdactic.com/ionic-pwa-web-push
+    this.afMessaging.messages.subscribe(async (msg: any) => {
+      const toast = await this.toastCtrl.create({
+        header: msg.notification.title,
+        message: msg.notification.body,
+        buttons: [
+          {
+            text: 'Ok',
+            role: 'cancel',
+          }
+        ]
+      });
+
+      await toast.present();
+    });
   }
 
   async joinGroup() {
@@ -67,10 +88,7 @@ export class JoinGroupPage implements OnInit {
     })
     let codes: string[] = [];
     this.groups.forEach(group => { codes.push(group.joinCode) });
-    console.log(codes);
-    console.log(this.code);
     let groupIndex = codes.findIndex(gCode => this.code === gCode);
-    console.log(groupIndex);
     if (groupIndex !== -1) {
       let group = this.groups[groupIndex];
       let userDoc = await this.db.collection<Person>('/People').ref.doc(this.userID).get();
@@ -83,7 +101,6 @@ export class JoinGroupPage implements OnInit {
         email: userDoc.get("email"),
         id: userDoc.id
       }
-      console.log(user);
       if (group.People.length < group.numPeople) {
         group.People.push({ Name: user.Name, id: user.id });
         user.Groups.push({ GifteeName: "", GifteeID: "", GroupID: group.id });

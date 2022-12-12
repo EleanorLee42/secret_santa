@@ -9,7 +9,7 @@ exports.docChange = functions.firestore.document("People/{docId}").onUpdate(asyn
   let oldPerson = await change.before.data();
 
   for (let i = 0; i < person.Groups.length; i++) {
-    if (person.Groups[i].GifteeID !== "" && oldPerson.Groups[i].GifteeID === "") {
+    if (person.Groups[i].GifteeID !== "" && oldPerson.Groups[i].GifteeID === "" && person.Token) {
       let groupDoc = await admin.firestore.collection('/Group').doc(person.Groups.GroupID).get();
       let group = {
         Groups: groupDoc.get("Groups"),
