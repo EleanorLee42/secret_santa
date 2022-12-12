@@ -58,6 +58,8 @@ export class PersonViewPage implements OnInit {
     }
     let userGroupIndex = user.Groups.findIndex((element: MiniGroup) => element.GroupID === this.groupID);
     this.ispartner = (user.Groups[userGroupIndex].GifteeID === this.person.id);
+    console.log(this.person);
+    console.log(user);
   }
 
 }

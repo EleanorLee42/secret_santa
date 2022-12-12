@@ -48,6 +48,7 @@ export class UserHomePage implements OnInit {
     private afMessaging: AngularFireMessaging,
     private db: AngularFirestore,
   ) {
+    this.requestPermission();
     // this.listenForMessages();
   }
 
