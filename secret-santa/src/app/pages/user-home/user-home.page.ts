@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { AngularFireMessaging } from '@angular/fire/compat/messaging';
 import { ActivatedRoute } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 interface MiniPerson {
   Name: string,
@@ -48,9 +49,10 @@ export class UserHomePage implements OnInit {
     private route: ActivatedRoute,
     private afMessaging: AngularFireMessaging,
     private db: AngularFirestore,
+    private toastCtrl: ToastController
   ) {
     this.requestPermission();
-    // this.listenForMessages();
+    this.listenForMessages();
   }
 
   requestPermission() {
@@ -100,6 +102,24 @@ export class UserHomePage implements OnInit {
       };
     });
     this.groups = this.groups.filter((group: Group) => groupIds.includes(group.id))
+  }
+
+  listenForMessages = async () => {
+    // Based on https://devdactic.com/ionic-pwa-web-push
+    this.afMessaging.messages.subscribe(async (msg: any) => {
+      const toast = await this.toastCtrl.create({
+        header: msg.notification.title,
+        message: msg.notification.body,
+        buttons: [
+          {
+            text: 'Ok',
+            role: 'cancel',
+          }
+        ]
+      });
+
+      await toast.present();
+    });
   }
 
 }

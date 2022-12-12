@@ -49,7 +49,6 @@ export class GroupViewPage implements OnInit {
   userID: string;
   private peopleCollection: AngularFirestoreCollection<Person> = this.db.collection<Person>('/People');
   people: Person[];
-  // private groupCollection: AngularFirestoreCollection<Group> = this.db.collection<Group>('/Groups');
   group: Group; // Current group
   messaging = getMessaging(initializeApp(environment.firebase));
   userGroupIndex: number;
