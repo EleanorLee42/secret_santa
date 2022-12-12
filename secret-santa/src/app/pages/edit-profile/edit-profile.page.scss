@@ -1,3 +1,9 @@
+// styling for cancel button
+#cancel-btn {
+    --background: #251605;
+    --background-activated: #251605;
+}
+
 // keep Done button at bottom of page
 .foot-div {
     position: fixed;
@@ -7,7 +13,7 @@
 
 // class to set bkgd to green (for ion-toolbar)
 .green-background {
-    --background: #138A36;
+    --background: #138A36; //#FFFCF2; 
 }
 
 // class for styling page header
@@ -18,7 +24,7 @@
 // styling for ion-item that holds Name input
 .input-name {
     // border: 2px solid 251605;
-    color: #FFFCF2;
+    color: #FFFCF2; //#251605; 
     font-size: 2.5em;
     font-weight: bold;
     text-align: left;
@@ -35,7 +41,7 @@ ion-button {
 
 // use shadow part to set background color for input
 ion-item.input-name::part(native) {
-    background-color: #138A36;
+    background-color: #138A36; //#FFFCF2; 
   }
 
 // set padding for page header

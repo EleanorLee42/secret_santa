@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
+import { IonInput, IonItem, IonItemSliding } from '@ionic/angular';
+import { createInputFiles } from 'typescript';
 
 interface MiniGroup {
   GifteeName: string,
@@ -56,6 +58,11 @@ export class EditProfilePage implements OnInit {
     this.user.Interests = this.newInterests;
     this.user.PhoneNumber = this.newPhone;
     this.db.collection<Person>('/People').doc(this.userID).update(this.user);
+  }
+
+  focus() {
+    console.log('focus called!');
+  //   @ViewChild('IonInput') ionItem: IonItem;
   }
 
   ngOnInit() {
