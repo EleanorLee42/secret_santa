@@ -16,7 +16,7 @@
   <div class="content people-div">
     <p>People:</p>
     <p *ngFor="let person of people" class="member" routerLink="/person-view/{{person.id}}/{{group.id}}/{{userID}}">
-      {{person.Name}}
+      {{person?.Name}}
       <ng-container *ngIf="person.id === user.Groups[userGroupIndex].GifteeID"> STAR</ng-container>
       <!-- TODO: change 'STAR' to actual star image -->
     </p>

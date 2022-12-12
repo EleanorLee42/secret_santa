@@ -33,7 +33,7 @@ export class PersonViewPage implements OnInit {
     private db: AngularFirestore) { }
 
   async ngOnInit() {
-    this.userID = String(this.route.snapshot.paramMap.get('id')); //gets userID from route parameter
+    this.userID = String(this.route.snapshot.paramMap.get('uid')); //gets userID from route parameter
     this.personID = String(this.route.snapshot.paramMap.get('id')); //gets personID from route parameter
     this.groupID = String(this.route.snapshot.paramMap.get('gid')); //gets groupID from route parameter
     let personDoc = await this.db.collection<Person>('/People').ref.doc(this.personID).get();
