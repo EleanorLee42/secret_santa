@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireMessaging } from '@angular/fire/compat/messaging';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 
 interface MiniGroup {
@@ -31,7 +31,9 @@ export class EditProfilePage implements OnInit {
   newInterests: string;
   newPhone: string;
 
-  constructor(private route: ActivatedRoute,
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
     private db: AngularFirestore,
     private afMessaging: AngularFireMessaging,
     private toastCtrl: ToastController) {
@@ -63,6 +65,7 @@ export class EditProfilePage implements OnInit {
     this.user.Interests = this.newInterests;
     this.user.PhoneNumber = this.newPhone;
     this.db.collection<Person>('/People').doc(this.userID).update(this.user);
+    this.router.navigate(['/user-home', this.userID]);
   }
   listenForMessages = async () => {
     // Based on https://devdactic.com/ionic-pwa-web-push
