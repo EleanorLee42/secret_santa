@@ -14,7 +14,7 @@ interface Group {
   numPeople: number,
   id: string,
   People: MiniPerson[],
-  date?: Date
+  date?: string
 }
 interface MiniGroup {
   GifteeName: string,
@@ -41,6 +41,7 @@ export class UserHomePage implements OnInit {
   userID: string;
   private groupCollection: AngularFirestoreCollection<Group> = this.db.collection<Group>('/Groups');
   public groups: Group[] | undefined; // Current group
+  user: Person;
   // messaging = getMessaging(initializeApp(environment.firebase));
 
   constructor(
@@ -53,20 +54,28 @@ export class UserHomePage implements OnInit {
   }
 
   requestPermission() {
+    // Based on https://devdactic.com/ionic-pwa-web-push
     return this.afMessaging.requestToken
       .subscribe(
         (token) => {
-          console.log('Permission granted! Save to the server!', token);
+          if (!token) {
+            token = "";
+          }
+          // console.log('Permission granted! Save to the server!', token);
           this.db.collection<Person>('/People').doc(this.userID).update({ "Token": token! });
         },
         (error) => { console.error(error); },
       );
   }
+  gifteeName(groupID: string): string {
+    let i = this.user.Groups.findIndex((group: MiniGroup) => group.GroupID === groupID);
+    return this.user.Groups[i].GifteeName;
+  }
 
   async ngOnInit() {
     this.userID = String(this.route.snapshot.paramMap.get('id')); //gets userID from route parameter
     let userDoc = await this.db.collection<Person>('/People').ref.doc(this.userID).get();
-    let user = {
+    this.user = {
       Groups: userDoc.get("Groups"),
       Interests: userDoc.get("Interests"),
       Name: userDoc.get("Name"),
@@ -76,7 +85,8 @@ export class UserHomePage implements OnInit {
       id: userDoc.id
     }
     let groupIds: string[] = [];
-    user.Groups.forEach((group: MiniGroup) => groupIds.push(group.GroupID));
+    this.user.Groups.forEach((group: MiniGroup) => groupIds.push(group.GroupID));
+    let dateFormatting = { weekday: "long", year: "numeric", month: "short", day: "numeric", hour: "numeric", minute: "numeric" } as const;
     let groupSub = await this.db.collection<Group>('/Groups').ref.get();
     this.groups = groupSub.docs.map((doc) => {
       return {
@@ -85,14 +95,11 @@ export class UserHomePage implements OnInit {
         numPeople: doc.get("numPeople"),
         People: doc.get("People"),
         description: doc.get("description"),
-        date: doc.get("date"),
+        date: new Date(doc.get("date")).toLocaleString('en-US', dateFormatting),
         id: doc.id
       };
     });
-    console.log(this.groups);
-    console.log(groupIds);
     this.groups = this.groups.filter((group: Group) => groupIds.includes(group.id))
-    console.log(this.groups);
   }
 
 }

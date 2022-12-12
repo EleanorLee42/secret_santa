@@ -1,10 +1,10 @@
-<ion-header collapse="condense" class="header ion-padding-vertical">
+<ion-header class="header ion-padding-vertical">
 
   <ion-toolbar class="green-background">
     <!--TODO: how to get text to wrap??-->
     <ion-item class="input-name">
       <ion-label position="stacked">Name</ion-label>
-      <ion-input value="Prof. Norman" [clearInput]="true"></ion-input>
+      <ion-input value={{user?.Name}} [clearInput]="true" [(ngModel)]="newName"></ion-input>
     </ion-item>
   </ion-toolbar>
 
@@ -13,20 +13,21 @@
 <ion-content>
   <ion-item class="input-interests">
     <ion-label position="stacked">Interests</ion-label>
-    <ion-input value="Coding, coral reefs, hymns, volleyball" [clearInput]="true"></ion-input>
+    <ion-input value={{user?.Interests}} [clearInput]="true" [(ngModel)]="newInterests"></ion-input>
   </ion-item>
 
   <ion-item class="input-email">
     <ion-label position="stacked">Email</ion-label>
-    <ion-input value="vtn2@calvin.edu" [clearInput]="true" type="email"></ion-input>
+    <ion-input value={{user?.email}} [clearInput]="true" type="email" [(ngModel)]="newEmail"></ion-input>
   </ion-item>
 
   <ion-item class="input-phone">
     <ion-label position="stacked">Phone Number</ion-label>
-    <ion-input value="616-555-5555" [clearInput]="true" type="tel"></ion-input>
+    <ion-input value={{user?.PhoneNumber}} [clearInput]="true" type="tel" [(ngModel)]="newPhone"></ion-input>
   </ion-item>
 
   <div class="foot-div">
-    <ion-button routerLink="/user-home">Done</ion-button>
+    <ion-button (click)="editProfile()">Save Changes</ion-button>
+    <ion-button routerLink="/user-home/{{userID}}">Done</ion-button>
   </div>
 </ion-content>

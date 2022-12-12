@@ -108,12 +108,13 @@ export class CreateGroupPage implements OnInit {
     while (this.checkCode(code)) {
       code = this.getCode();
     }
+    let groupDateString = new Date(this.groupDate).toLocaleString();
     let newGroup: Group = {
       Name: this.groupName,
       joinCode: code,
       numPeople: Number(this.numPeople),
       People: [{ Name: this.user.Name, id: this.user.id }],
-      date: this.groupDate,
+      date: groupDateString,
       description: this.groupDescription,
     }
     let newDoc = await this.db.collection<Group>('/Groups').add(newGroup);

@@ -67,10 +67,7 @@ export class JoinGroupPage implements OnInit {
     })
     let codes: string[] = [];
     this.groups.forEach(group => { codes.push(group.joinCode) });
-    console.log(codes);
-    console.log(this.code);
     let groupIndex = codes.findIndex(gCode => this.code === gCode);
-    console.log(groupIndex);
     if (groupIndex !== -1) {
       let group = this.groups[groupIndex];
       let userDoc = await this.db.collection<Person>('/People').ref.doc(this.userID).get();
@@ -83,7 +80,6 @@ export class JoinGroupPage implements OnInit {
         email: userDoc.get("email"),
         id: userDoc.id
       }
-      console.log(user);
       if (group.People.length < group.numPeople) {
         group.People.push({ Name: user.Name, id: user.id });
         user.Groups.push({ GifteeName: "", GifteeID: "", GroupID: group.id });
