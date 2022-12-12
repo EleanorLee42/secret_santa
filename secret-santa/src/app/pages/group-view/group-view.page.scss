@@ -35,6 +35,13 @@ ion-content {
     margin-left: 5%;
 }
 
+// styling for star icon
+ion-icon {
+    color: #F3B700;
+    font-size: xx-large;
+    margin-left: 5%;
+}
+
 // set padding for page header
 .ion-padding-vertical {
     padding-top: 15%;
@@ -62,6 +69,11 @@ ion-title {
 // styling for member names
 .member {
     font-family: 'Inconsolata';
+}
+
+.person-p {
+    display: flex;
+    align-items: center;
 }
 
 // alternate green/red colors for member names!!
