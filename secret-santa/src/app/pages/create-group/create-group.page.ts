@@ -100,7 +100,7 @@ export class CreateGroupPage implements OnInit {
     //code to make random string:
     // https://www.programiz.com/javascript/examples/generate-random-strings
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let code = ' ';
+    let code = '';
     for (let i = 0; i < 8; i++) {
       code += characters.charAt(Math.floor(Math.random() * characters.length));
     }
