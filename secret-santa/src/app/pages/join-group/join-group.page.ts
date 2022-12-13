@@ -4,35 +4,7 @@ import { AngularFireMessaging } from '@angular/fire/compat/messaging';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
 import { updateCurrentUser } from 'firebase/auth';
-
-interface MiniPerson {
-  Name: string,
-  id: string
-}
-
-interface Group {
-  Name: string,
-  joinCode: string,
-  numPeople: number,
-  id: string,
-  People: MiniPerson[],
-  date?: string,
-  description: string,
-}
-interface MiniGroup {
-  GifteeName: string,
-  GifteeID: string,
-  GroupID: string
-}
-interface Person {
-  Groups: MiniGroup[],
-  Interests: string,
-  Name: string,
-  PhoneNumber: string,
-  Token: string,
-  email: string,
-  id: string,
-}
+import { Group, MiniGroup, MiniPerson, Person } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-join-group',

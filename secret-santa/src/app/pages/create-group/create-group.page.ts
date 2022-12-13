@@ -4,35 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFireMessaging } from '@angular/fire/compat/messaging';
 import { ToastController } from '@ionic/angular';
-
-interface MiniPerson {
-  Name: string,
-  id: string
-}
-
-interface Group {
-  Name: string,
-  joinCode: string,
-  numPeople: number,
-  id?: string,
-  People: MiniPerson[],
-  date: string,
-  description: string,
-}
-interface MiniGroup {
-  GifteeName: string,
-  GifteeID: string,
-  GroupID: string
-}
-interface Person {
-  Groups: MiniGroup[],
-  Interests: string,
-  Name: string,
-  PhoneNumber: string,
-  Token: string,
-  email: string,
-  id: string,
-}
+import { Group, MiniGroup, MiniPerson, Person } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-create-group',
@@ -121,6 +93,7 @@ export class CreateGroupPage implements OnInit {
       People: [{ Name: this.user.Name, id: this.user.id }],
       date: groupDateString,
       description: this.groupDescription,
+      id: "",
     }
     let newDoc = await this.db.collection<Group>('/Groups').add(newGroup);
     this.user.Groups.push({ GifteeName: "", GifteeID: "", GroupID: newDoc.id });

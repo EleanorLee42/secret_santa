@@ -5,11 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
-
-interface Person {
-  email: string,
-  id: string,
-}
+import { Person } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-login',
@@ -54,7 +50,7 @@ export class LoginPage implements OnInit {
     // get Person in People whose email matches form submission
     // (can have only one acct per email, so I figure this is okay?)
     let userDoc = await this.db.collection<Person>('/People').ref.where("email", "==", this?.email?.value).get();
-    
+
     userDoc.forEach((doc) => {
       this.myId = doc.id;
     })

@@ -3,21 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { AngularFireMessaging } from '@angular/fire/compat/messaging';
 import { ToastController } from '@ionic/angular';
-
-interface MiniGroup {
-  GifteeName: string,
-  GifteeID: string,
-  GroupID: string
-}
-interface Person {
-  Groups: MiniGroup[],
-  Interests: string,
-  Name: string,
-  PhoneNumber: string,
-  Token: string,
-  email: string,
-  id: string,
-}
+import { MiniGroup, Person } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-person-view',

@@ -4,35 +4,7 @@ import { AngularFireMessaging } from '@angular/fire/compat/messaging';
 import { ToastController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-
-interface MiniPerson {
-  Name: string,
-  id: string
-}
-
-interface Group {
-  Name: string,
-  joinCode: string,
-  numPeople: number,
-  id: string,
-  People: MiniPerson[],
-  date?: string
-}
-interface MiniGroup {
-  GifteeName: string,
-  GifteeID: string,
-  GroupID: string
-}
-interface Person {
-  Groups: MiniGroup[],
-  Interests: string,
-  Name: string,
-  PhoneNumber: string,
-  Token: string,
-  email: string,
-  id: string,
-}
-
+import { Group, MiniGroup, MiniPerson, Person } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-user-home',
