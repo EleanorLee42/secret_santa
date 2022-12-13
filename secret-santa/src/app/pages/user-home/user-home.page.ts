@@ -3,7 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/comp
 import { AngularFireMessaging } from '@angular/fire/compat/messaging';
 import { ToastController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { Group, MiniGroup, MiniPerson, Person } from 'src/app/interfaces';
 
 @Component({
