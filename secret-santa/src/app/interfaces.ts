@@ -1,28 +1,28 @@
 export interface MiniPerson {
-  Name: string,
-  id: string
+  Name: string;
+  id: string;
 }
 
 export interface Group {
-  Name: string,
-  joinCode: string,
-  numPeople: number,
-  id: string,
-  People: MiniPerson[],
-  date: string,
-  description: string,
+  Name: string;
+  joinCode: string;
+  numPeople: number;
+  id: string;
+  People: MiniPerson[];
+  date: string;
+  description: string;
 }
 export interface MiniGroup {
-  GifteeName: string,
-  GifteeID: string,
-  GroupID: string
+  GifteeName: string;
+  GifteeID: string;
+  GroupID: string;
 }
 export interface Person {
-  Groups: MiniGroup[],
-  Interests: string,
-  Name: string,
-  PhoneNumber: string,
-  Token: string,
-  email: string,
-  id: string,
+  Groups: MiniGroup[];
+  Interests: string;
+  Name: string;
+  PhoneNumber: string;
+  Token: string;
+  email: string;
+  id: string;
 }

@@ -15,17 +15,17 @@
   <div class="content exchange-date">The exchange will happen {{group?.date}}</div>
   <div class="content people-div">
     <p>People:</p>
-    <p *ngFor="let person of people" class="member person-p" 
-    routerLink="/person-view/{{person.id}}/{{group.id}}/{{userID}}">
+    <p *ngFor="let person of people" class="member person-p"
+      routerLink="/person-view/{{person.id}}/{{group.id}}/{{userID}}">
       {{person?.Name}}
-      <ng-container class="star-container" 
-      *ngIf="person.id === user.Groups[userGroupIndex].GifteeID">
+      <ng-container class="star-container" *ngIf="person.id === user.Groups[userGroupIndex].GifteeID">
         <ion-icon name="star"></ion-icon>
       </ng-container>
       <!-- TODO: change 'STAR' to actual star image -->
     </p>
   </div>
-  <ion-button expand="full" (click)="assignPartners()">Assign Partners and Send Message</ion-button>
+  <ion-button (click)="assignPartners()">Assign Partners</ion-button>
+  <ion-button (click)="deleteGroup()">Delete this group</ion-button>
 
   <div class="foot-div">
     <ion-button routerLink="/user-home/{{userID}}" routerDirection="back">Home</ion-button>

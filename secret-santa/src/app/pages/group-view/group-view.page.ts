@@ -5,9 +5,10 @@ import { initializeApp } from "firebase/app";
 import { environment } from '../../../environments/environment';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { AngularFireMessaging } from '@angular/fire/compat/messaging';
-import { ActivatedRoute } from '@angular/router';
-import { Timestamp } from 'firebase/firestore';
-import { Group, MiniGroup, MiniPerson, Person } from 'src/app/interfaces';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Group, MiniGroup, Person } from 'src/app/interfaces';
+import { DataServiceService } from 'src/app/services/dataService/data-service.service';
+import { deleteDoc, doc, getFirestore } from 'firebase/firestore';
 
 
 @Component({
@@ -28,55 +29,24 @@ export class GroupViewPage implements OnInit {
   constructor(private toastCtrl: ToastController,
     private db: AngularFirestore,
     private afMessaging: AngularFireMessaging,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private dataService: DataServiceService,
+    private router: Router) {
     this.listenForMessages();
+    this.groupID = String(this.route.snapshot.paramMap.get('id')); //gets groupID from route parameter
   }
 
   async ngOnInit() {
-    this.userID = String(this.route.snapshot.paramMap.get('uid')); //gets userID from route parameter
-    console.count(this.userID);
-    this.groupID = String(this.route.snapshot.paramMap.get('id')); //gets groupID from route parameter
-    let userDoc = await this.db.collection<Person>('/People').ref.doc(this.userID).get();
-    this.user = {
-      Groups: userDoc.get("Groups"),
-      Interests: userDoc.get("Interests"),
-      Name: userDoc.get("Name"),
-      PhoneNumber: userDoc.get("PhoneNumber"),
-      Token: userDoc.get("Token"),
-      email: userDoc.get("email"),
-      id: userDoc.id
-    }
-    let dateFormatting = { weekday: "long", year: "numeric", month: "short", day: "numeric", hour: "numeric", minute: "numeric" } as const;
-    this.userGroupIndex = this.user.Groups.findIndex((group: MiniGroup) => group.GroupID === this.groupID)
-    let groupDoc = await this.db.collection<Group>('/Groups').ref.doc(this.groupID).get();
-    this.group = {
-      Name: groupDoc.get("Name"),
-      joinCode: groupDoc.get("joinCode"),
-      numPeople: groupDoc.get("numPeople"),
-      People: groupDoc.get("People"),
-      description: groupDoc.get("description"),
-      date: new Date(groupDoc.get("date")).toLocaleString('en-US', dateFormatting),
-      id: groupDoc.id
-    }
+    this.user = await this.dataService.getUser();
+    this.userGroupIndex = this.user.Groups.findIndex((group: MiniGroup) => group.GroupID === this.groupID);
+    this.group = await this.dataService.getOneGroup(this.groupID);
+    this.people = await this.dataService.getAllPeople();
     let ids: string[] = [];
     this.group.People.forEach(element => {
       ids.push(element.id);
     });
-
-    let peopleSnap = await this.db.collection("/People").ref.get();
-    this.people = peopleSnap.docs.map((doc) => {
-      return {
-        Groups: doc.get("Groups"),
-        Interests: doc.get("Interests"),
-        Name: doc.get("Name"),
-        PhoneNumber: doc.get("PhoneNumber"),
-        Token: doc.get("Token"),
-        email: doc.get("email"),
-        id: doc.id
-      };
-    })
-    //list of people in currect group
     this.people = this.people.filter(person => ids.includes(person.id));
+    this.userID = this.user.id;
   }
 
   assignPartners = () => {
@@ -91,12 +61,27 @@ export class GroupViewPage implements OnInit {
     let peopleIndex: number;
     let groupIndex: number;
     for (let i = 0; i < groupPeople!.length; i++) {
-      peopleIndex = this.people.findIndex((person: Person) => person.id === groupPeople[i].id)
-      groupIndex = this.people[peopleIndex].Groups.findIndex((group: MiniGroup) => group.GroupID === this.group.id)
+      peopleIndex = this.people.findIndex((person: Person) => person.id === groupPeople[i].id);
+      groupIndex = this.people[peopleIndex].Groups.findIndex((group: MiniGroup) => group.GroupID === this.group.id);
       this.people[peopleIndex].Groups[groupIndex].GifteeID = groupPeople[(i + 1) % groupPeople.length].id;
       this.people[peopleIndex].Groups[groupIndex].GifteeName = groupPeople[(i + 1) % groupPeople.length].Name;
       this.peopleCollection.doc(this.people![peopleIndex].id).update(this.people![peopleIndex]);
     }
+  }
+
+  async deleteGroup() {
+    console.log(this.people);
+    this.people.forEach((person: Person) => {
+      let index = person.Groups.findIndex((group: MiniGroup) => { group.GroupID === this.groupID });
+      person.Groups.splice(index, 1);
+      this.peopleCollection.doc(person.id).set(person);
+    });
+    console.log(this.people);
+    let datab = getFirestore();
+    let docRef = doc(datab, "Groups", this.groupID);
+    deleteDoc(docRef);
+    // await this.db.collection<Group>('/Group').doc(this.groupID).delete();
+    this.router.navigate(['/user-home', this.userID]);
   }
 
   listenForMessages = async () => {
