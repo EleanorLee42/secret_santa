@@ -65,6 +65,17 @@ ion-title {
     white-space: normal;
 }
 
+<<<<<<< Updated upstream
 .white-text {
     color: #FFFCF2;
+=======
+// styling for name input label
+// (avoid ion-input turning blue on focus)
+.name-label {
+    color: #FFFCF2;
+    font-weight: bold;
+    margin-bottom: 0%;
+    margin-left: 6%;
+    padding-bottom: 0%;
+>>>>>>> Stashed changes
 }

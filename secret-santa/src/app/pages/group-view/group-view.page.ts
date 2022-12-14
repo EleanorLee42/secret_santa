@@ -5,9 +5,16 @@ import { initializeApp } from "firebase/app";
 import { environment } from '../../../environments/environment';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { AngularFireMessaging } from '@angular/fire/compat/messaging';
+<<<<<<< Updated upstream
 import { ActivatedRoute } from '@angular/router';
 import { Timestamp } from 'firebase/firestore';
 import { Group, MiniGroup, MiniPerson, Person } from 'src/app/interfaces';
+=======
+import { ActivatedRoute, Router } from '@angular/router';
+import { Group, MiniGroup, Person } from 'src/app/interfaces';
+import { DataServiceService } from '../../services/dataService/data-service.service';
+import { deleteDoc, doc, getFirestore } from 'firebase/firestore';
+>>>>>>> Stashed changes
 
 
 @Component({

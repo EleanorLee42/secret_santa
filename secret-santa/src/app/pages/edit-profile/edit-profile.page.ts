@@ -5,6 +5,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { IonInput, ToastController } from '@ionic/angular';
 import { MiniGroup, Person } from 'src/app/interfaces';
+<<<<<<< Updated upstream
+=======
+import { DataServiceService } from '../../services/dataService/data-service.service';
+>>>>>>> Stashed changes
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.page.html',
@@ -81,6 +85,7 @@ export class EditProfilePage implements OnInit {
     });
   }
 
+<<<<<<< Updated upstream
   // On some browsers, focusing on input turns the text blue...
   // focus() fixes that for the name input (which suffers the most aesthetically).
   // Fix idea from: https://stackoverflow.com/questions/66863294/change-input-border-color-in-ionic-application-with-button-click
@@ -88,6 +93,8 @@ export class EditProfilePage implements OnInit {
     this.whiteText = true;
   }
 
+=======
+>>>>>>> Stashed changes
   ngOnInit() {
 
   }
