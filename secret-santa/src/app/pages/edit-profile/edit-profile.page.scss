@@ -4,11 +4,19 @@
     --background-activated: #251605;
 }
 
+// styling for delete button
+#delete-btn {
+    --background: #CC2936;
+    --background-activated: #CC2936;
+}
+
 // keep Done button at bottom of page
 .foot-div {
+    justify-content: space-evenly;
+    display: flex;
     position: fixed;
     bottom: 1%;
-    right: 2%;
+    width: 100%;
 }
 
 // class to set bkgd to green (for ion-toolbar)

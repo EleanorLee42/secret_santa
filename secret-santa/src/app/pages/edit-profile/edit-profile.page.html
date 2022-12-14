@@ -27,7 +27,8 @@
   </ion-item>
 
   <div class="foot-div">
-    <ion-button (click)="editProfile()">Save</ion-button>
     <ion-button id="cancel-btn" routerLink="/user-home/{{userID}}">Cancel</ion-button>
+    <ion-button id="delete-btn" (click)="deleteUser()">Delete account</ion-button>
+    <ion-button (click)="editProfile()">Save</ion-button>
   </div>
 </ion-content>

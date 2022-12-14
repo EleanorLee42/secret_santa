@@ -18,6 +18,7 @@
 // Container: div that holds the page's main content
 #container {
     display: block;
+    padding-top: 20%;
 }
 
 // styling for Done button
@@ -28,6 +29,12 @@
     // margin-left: 70%;
     // margin-right: auto;
     // margin-top: 10%;
+}
+
+// styling for page header (back btn)
+ion-header {
+    padding-left: 3%;
+    padding-top: 5%;
 }
 
 // styling for input fields

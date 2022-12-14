@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from '@angular/fire/auth';
+import { getAuth, deleteUser, reauthenticateWithCredential } from "firebase/auth";
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,18 @@ export class AuthService {
 
   constructor(private auth: Auth) { }
 
+  // except this code is from https://firebase.google.com/docs/auth/web/manage-users#web-version-9_11 !!
+  deleteUser = () => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (user) {
+      try {deleteUser(user);}
+      catch (err) {console.log(err);}
+    }
+    
+  }
+
   async loginUser({ email, password}: {email: string, password: string}) {
     try {
       const user = await signInWithEmailAndPassword(this.auth, email, password);
@@ -18,6 +31,10 @@ export class AuthService {
       console.log(err);
       return null;
     }
+  }
+
+  logoutUser() {
+    return signOut(this.auth);
   }
 
   async signUpUser({ email, password }: {email: string; password: string}) {
@@ -30,8 +47,16 @@ export class AuthService {
     }
   }
 
-  logoutUser() {
-    return signOut(this.auth);
+  reAuthenticate () {
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (user) {
+
+    }
+
+    // const credential = promptForCredentials();
+    // reauthenticateWithCredential(user, credential)
   }
 
   // TODO: get reset password working

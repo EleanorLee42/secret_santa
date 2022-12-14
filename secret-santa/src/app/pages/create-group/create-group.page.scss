@@ -18,6 +18,7 @@
 // Container: div that holds the page's main content
 #container {
     display: block;
+    padding-top: 18%;
 }
 
 // styling for Done button (is only button on pg)
@@ -32,6 +33,12 @@ ion-button {
 
 ion-datetime-button {
     margin-bottom: 5%;
+}
+
+// styling for page header (back btn)
+ion-header {
+    padding-left: 3%;
+    padding-top: 5%;
 }
 
 // styling for single-line inputs
