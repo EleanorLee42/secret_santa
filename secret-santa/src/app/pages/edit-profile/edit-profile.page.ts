@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireMessaging } from '@angular/fire/compat/messaging';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { IonInput, ToastController } from '@ionic/angular';
 import { MiniGroup, Person } from 'src/app/interfaces';
 @Component({
   selector: 'app-edit-profile',
@@ -16,6 +16,9 @@ export class EditProfilePage implements OnInit {
   newName: string;
   newInterests: string;
   newPhone: string;
+
+  // for focus() function/name input styling
+  public whiteText: boolean = false;
 
   constructor(
     private router: Router,
@@ -71,9 +74,11 @@ export class EditProfilePage implements OnInit {
     });
   }
 
+  // On some browsers, focusing on input turns the text blue...
+  // focus() fixes that for the name input (which suffers the most aesthetically).
+  // Fix idea from: https://stackoverflow.com/questions/66863294/change-input-border-color-in-ionic-application-with-button-click
   focus() {
-    console.log('focus called!');
-  //   @ViewChild('IonInput') ionItem: IonItem;
+    this.whiteText = true;
   }
 
   ngOnInit() {

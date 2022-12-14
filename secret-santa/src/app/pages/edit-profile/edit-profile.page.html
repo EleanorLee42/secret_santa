@@ -2,7 +2,7 @@
 
   <ion-toolbar class="green-background">
     <!--TODO: how to get text to wrap??-->
-    <ion-item class="input-name">
+    <ion-item [ngClass]="{'input-name':true, 'white-text': whiteText}" id="#name">
       <ion-label position="stacked">Name</ion-label>
       <ion-input value={{user?.Name}} [clearInput]="true" [(ngModel)]="newName" (ionFocus)="focus()"></ion-input>
     </ion-item>

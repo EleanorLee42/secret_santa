@@ -13,7 +13,8 @@
       <strong>My groups</strong>
     </div>
     <ng-container *ngFor="let group of groups; even as isEven">
-      <group-banner groupName={{group.Name}} [gifteeName]=gifteeName(group.id) 
+      <!--Alternating color on even/odd from https://stackoverflow.com/questions/72541404/make-every-odd-row-different-color-than-even-row-angular-and-css-->
+      <group-banner groupName={{group.Name}} [gifteeName]=gifteeName(group.id)
         exchangeDate={{group.date}} [bgColor]="isEven?'green':'red'"
         routerLink="/group-view/{{group.id}}/{{userID}}"></group-banner>
     </ng-container>
