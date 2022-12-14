@@ -1,0 +1,24 @@
+<ion-header class="header ion-padding-vertical">
+
+  <ion-toolbar class="red-background">
+    <ion-title size="large">
+      <div class="ion-text-wrap">{{group?.Name}}</div>
+    </ion-title>
+  </ion-toolbar>
+
+  <p class="join-code">Join code: {{group?.joinCode}}</p>
+</ion-header>
+
+<ion-content>
+  <div class="content description">{{group?.description}}</div>
+  <div class="content exchange-date">The exchange will happen {{group?.date}}</div>
+  <div>This group has {{group?.People?.length}} of {{group?.numPeople}} spots filled</div>
+  <ion-button *ngIf="!inGroup" (click)="joinGroup()">Join this group</ion-button>
+  <div *ngIf="inGroup">You are already in this group!</div>
+
+
+  <div class="foot-div">
+    <ion-button routerLink="/public-groups/{{userID}}" routerDirection="back">Back</ion-button>
+    <ion-button routerLink="/user-home/{{userID}}" routerDirection="back">Home</ion-button>
+  </div>
+</ion-content>

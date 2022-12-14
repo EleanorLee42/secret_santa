@@ -1,4 +1,4 @@
-<ion-header collapse="condense" class="header ion-padding-vertical">
+<ion-header class="header ion-padding-vertical">
 
   <ion-toolbar class="brown-background">
     <!--TODO: how to get text to wrap??-->
@@ -14,9 +14,8 @@
     </div>
     <ng-container *ngFor="let group of groups; even as isEven">
       <!--Alternating color on even/odd from https://stackoverflow.com/questions/72541404/make-every-odd-row-different-color-than-even-row-angular-and-css-->
-      <group-banner groupName={{group.Name}} [gifteeName]=gifteeName(group.id)
-        exchangeDate={{group.date}} [bgColor]="isEven?'green':'red'"
-        routerLink="/group-view/{{group.id}}/{{userID}}"></group-banner>
+      <group-banner groupName={{group.Name}} [gifteeName]=gifteeName(group.id) exchangeDate={{group.date}}
+        [bgColor]="isEven?'green':'red'" routerLink="/group-view/{{group.id}}/{{userID}}"></group-banner>
     </ng-container>
 
     <div class="foot-div">

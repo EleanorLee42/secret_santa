@@ -36,6 +36,7 @@ export class DataServiceService {
       People: groupDoc.get("People"),
       description: groupDoc.get("description"),
       date: new Date(groupDoc.get("date")).toLocaleString('en-US', this.dateFormatting),
+      isPublic: groupDoc.get("isPublic"),
       id: groupDoc.id
     }
     return group;
@@ -51,6 +52,7 @@ export class DataServiceService {
         People: doc.get("People"),
         description: doc.get("description"),
         date: new Date(doc.get("date")).toLocaleString('en-US', this.dateFormatting),
+        isPublic: doc.get("isPublic"),
         id: doc.id
       };
     });

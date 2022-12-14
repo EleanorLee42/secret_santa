@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { UserHomePageRoutingModule } from './user-home-routing.module';
+import { PublicGroupsPageRoutingModule } from './public-groups-routing.module';
 
-import { UserHomePage } from './user-home.page';
+import { PublicGroupsPage } from './public-groups.page';
 import { GroupBannerComponent } from 'src/app/components/group-banner/group-banner.component';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { GroupBannerComponent } from 'src/app/components/group-banner/group-bann
     CommonModule,
     FormsModule,
     IonicModule,
-    UserHomePageRoutingModule,
-    GroupBannerComponent,
+    PublicGroupsPageRoutingModule,
+    GroupBannerComponent
   ],
-  declarations: [UserHomePage]
+  declarations: [PublicGroupsPage]
 })
-export class UserHomePageModule { }
+export class PublicGroupsPageModule { }

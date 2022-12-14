@@ -11,6 +11,7 @@ export interface Group {
   People: MiniPerson[];
   date: string;
   description: string;
+  isPublic: boolean;
 }
 export interface MiniGroup {
   GifteeName: string;

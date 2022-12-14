@@ -7,13 +7,12 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { Group, MiniGroup, MiniPerson, Person } from 'src/app/interfaces';
 import { DataServiceService } from '../../services/dataService/data-service.service';
 
-
 @Component({
-  selector: 'app-user-home',
-  templateUrl: './user-home.page.html',
-  styleUrls: ['./user-home.page.scss'],
+  selector: 'app-public-groups',
+  templateUrl: './public-groups.page.html',
+  styleUrls: ['./public-groups.page.scss'],
 })
-export class UserHomePage implements OnInit {
+export class PublicGroupsPage implements OnInit {
   userID: string;
   public groups: Group[] | undefined; // Current group
   user: Person;
@@ -28,41 +27,16 @@ export class UserHomePage implements OnInit {
     private router: Router,
     private dataService: DataServiceService,
   ) {
-    this.requestPermission();
     this.listenForMessages();
-  }
-
-  async logout() {
-    await this.authService.logoutUser();
-    this.router.navigateByUrl('/', { replaceUrl: true });
-  }
-
-  requestPermission() {
-    // Based on https://devdactic.com/ionic-pwa-web-push
-    return this.afMessaging.requestToken
-      .subscribe(
-        (token) => {
-          if (!token) {
-            token = "";
-          }
-          // console.log('Permission granted! Save to the server!', token);
-          this.db.collection<Person>('/People').doc(this.userID).update({ "Token": token! });
-        },
-        (error) => { console.error(error); },
-      );
-  }
-  gifteeName(groupID: string): string {
-    let i = this.user.Groups.findIndex((group: MiniGroup) => group.GroupID === groupID);
-    return this.user.Groups[i].GifteeName;
   }
 
   async ngOnInit() {
     this.userID = String(this.route.snapshot.paramMap.get('id')); //gets userID from route parameter
     this.user = await this.dataService.getUser(this.userID);
-    let groupIds: string[] = [];
-    this.user.Groups.forEach((group: MiniGroup) => groupIds.push(group.GroupID));
+    // let groupIds: string[] = [];
+    // this.user.Groups.forEach((group: MiniGroup) => groupIds.push(group.GroupID));
     this.groups = await this.dataService.getAllGroups();
-    this.groups = this.groups.filter((group: Group) => groupIds.includes(group.id))
+    this.groups = this.groups.filter((group: Group) => group.isPublic && (group.numPeople > group.People.length))
   }
 
   listenForMessages = async () => {
