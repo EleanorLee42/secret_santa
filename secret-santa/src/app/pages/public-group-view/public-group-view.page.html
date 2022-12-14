@@ -14,6 +14,7 @@
   <div class="content exchange-date">The exchange will happen {{group?.date}}</div>
   <div>This group has {{group?.People?.length}} of {{group?.numPeople}} spots filled</div>
   <ion-button *ngIf="!inGroup" (click)="joinGroup()">Join this group</ion-button>
+
   <div *ngIf="inGroup">You are already in this group!</div>
 
 

@@ -77,6 +77,7 @@ export class CreateGroupPage implements OnInit {
       description: this.groupDescription,
       isPublic: this.isPublic,
       id: "",
+      adminID: this.userID,
     }
     let newDoc = await this.db.collection<Group>('/Groups').add(newGroup);
     this.user.Groups.push({ GifteeName: "", GifteeID: "", GroupID: newDoc.id });

@@ -59,7 +59,8 @@ export class PublicGroupViewPage implements OnInit {
 
 
   async joinGroup() {
-
+    console.log(this.group);
+    console.log(this.group.adminID);
     this.group.People.push({ Name: this.user.Name, id: this.user.id });
     this.user.Groups.push({ GifteeName: "", GifteeID: "", GroupID: this.group.id });
     this.db.collection<Person>('/People').doc(this.userID).update(this.user);

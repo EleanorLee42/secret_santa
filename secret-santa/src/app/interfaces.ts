@@ -12,6 +12,7 @@ export interface Group {
   date: string;
   description: string;
   isPublic: boolean;
+  adminID: string;
 }
 export interface MiniGroup {
   GifteeName: string;
