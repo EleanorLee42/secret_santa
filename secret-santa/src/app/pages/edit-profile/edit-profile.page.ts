@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireMessaging } from '@angular/fire/compat/messaging';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { MiniGroup, Person } from 'src/app/interfaces';
+import { DataServiceService } from 'src/app/services/dataService/data-service.service';
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.page.html',
@@ -22,23 +23,15 @@ export class EditProfilePage implements OnInit {
     private route: ActivatedRoute,
     private db: AngularFirestore,
     private afMessaging: AngularFireMessaging,
-    private toastCtrl: ToastController) {
+    private toastCtrl: ToastController,
+    private dataService: DataServiceService) {
     this.getUser();
     this.listenForMessages();
   }
 
   async getUser() {
     this.userID = String(this.route.snapshot.paramMap.get('id')); //gets userID from route parameter
-    let userDoc = await this.db.collection<Person>('/People').ref.doc(this.userID).get();
-    this.user = {
-      Groups: userDoc.get("Groups"),
-      Interests: userDoc.get("Interests"),
-      Name: userDoc.get("Name"),
-      PhoneNumber: userDoc.get("PhoneNumber"),
-      Token: userDoc.get("Token"),
-      email: userDoc.get("email"),
-      id: userDoc.id
-    }
+    this.user = await this.dataService.getUser();
     this.newEmail = this.user.email;
     this.newName = this.user.Name;
     this.newInterests = this.user.Interests;
@@ -73,7 +66,7 @@ export class EditProfilePage implements OnInit {
 
   focus() {
     console.log('focus called!');
-  //   @ViewChild('IonInput') ionItem: IonItem;
+    //   @ViewChild('IonInput') ionItem: IonItem;
   }
 
   ngOnInit() {
