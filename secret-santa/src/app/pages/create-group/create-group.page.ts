@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { AngularFireMessaging } from '@angular/fire/compat/messaging';
 import { ToastController } from '@ionic/angular';
 import { Group, MiniGroup, MiniPerson, Person } from 'src/app/interfaces';
@@ -28,42 +28,19 @@ export class CreateGroupPage implements OnInit {
     private db: AngularFirestore,
     private formBuilder: FormBuilder,
     private afMessaging: AngularFireMessaging,
-    private toastCtrl: ToastController) {
+    private toastCtrl: ToastController,
+    private dataService: DataServiceService) {
     this.ngForm = this.formBuilder.group({
       ngForm: ['']
     });
     this.listenForMessages();
   }
 
-  async getGroups() {
-    let groupSub = await this.db.collection<Group>('/Groups').ref.get();
-    let groups = groupSub.docs.map((doc) => {
-      return {
-        Name: doc.get("Name"),
-        joinCode: doc.get("joinCode"),
-        numPeople: doc.get("numPeople"),
-        People: doc.get("People"),
-        description: doc.get("description"),
-        date: doc.get("date"),
-        id: doc.id
-      };
-    });
-    groups.forEach(group => { this.codes.push(group.joinCode) });
-  }
-
   async ngOnInit() {
-    this.userID = String(this.route.snapshot.paramMap.get('id')); //gets userID from route parameter
+    // this.userID = String(this.route.snapshot.paramMap.get('id')); //gets userID from route parameter
     this.currentDate = new Date().toISOString();
-    let userDoc = await this.db.collection<Person>('/People').ref.doc(this.userID).get();
-    this.user = {
-      Groups: userDoc.get("Groups"),
-      Interests: userDoc.get("Interests"),
-      Name: userDoc.get("Name"),
-      PhoneNumber: userDoc.get("PhoneNumber"),
-      Token: userDoc.get("Token"),
-      email: userDoc.get("email"),
-      id: userDoc.id
-    }
+    this.user = await this.dataService.getUser();
+    this.userID = this.user.id;
   }
 
   checkCode(newCode: string): boolean {
@@ -81,11 +58,14 @@ export class CreateGroupPage implements OnInit {
   }
 
   async makeGroup() {
-    this.getGroups();
+    let groups = await this.dataService.getAllGroups();
+    groups.forEach(group => { this.codes.push(group.joinCode) });
+
     let code = this.getCode();
     while (this.checkCode(code)) {
       code = this.getCode();
     }
+
     let groupDateString = new Date(this.groupDate).toLocaleString();
     let newGroup: Group = {
       Name: this.groupName,
@@ -101,6 +81,7 @@ export class CreateGroupPage implements OnInit {
     this.db.collection<Person>('/People').doc(this.userID).update(this.user);
     this.router.navigate(['/group-view', newDoc.id, this.userID]);
   }
+
   listenForMessages = async () => {
     // Based on https://devdactic.com/ionic-pwa-web-push
     this.afMessaging.messages.subscribe(async (msg: any) => {

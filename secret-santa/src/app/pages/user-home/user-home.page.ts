@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireMessaging } from '@angular/fire/compat/messaging';
 import { ToastController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -14,7 +14,6 @@ import { DataServiceService } from '../../services/dataService/data-service.serv
 })
 export class UserHomePage implements OnInit {
   userID: string;
-  private groupCollection: AngularFirestoreCollection<Group> = this.db.collection<Group>('/Groups');
   public groups: Group[] | undefined; // Current group
   user: Person;
   // messaging = getMessaging(initializeApp(environment.firebase));
@@ -26,6 +25,7 @@ export class UserHomePage implements OnInit {
     private db: AngularFirestore,
     private toastCtrl: ToastController,
     private router: Router,
+    private dataService: DataServiceService,
   ) {
     this.requestPermission();
     this.listenForMessages();
@@ -57,31 +57,10 @@ export class UserHomePage implements OnInit {
 
   async ngOnInit() {
     this.userID = String(this.route.snapshot.paramMap.get('id')); //gets userID from route parameter
-    let userDoc = await this.db.collection<Person>('/People').ref.doc(this.userID).get();
-    this.user = {
-      Groups: userDoc.get("Groups"),
-      Interests: userDoc.get("Interests"),
-      Name: userDoc.get("Name"),
-      PhoneNumber: userDoc.get("PhoneNumber"),
-      Token: userDoc.get("Token"),
-      email: userDoc.get("email"),
-      id: userDoc.id
-    }
+    this.user = await this.dataService.getUser(this.userID);
     let groupIds: string[] = [];
     this.user.Groups.forEach((group: MiniGroup) => groupIds.push(group.GroupID));
-    let dateFormatting = { weekday: "long", year: "numeric", month: "short", day: "numeric", hour: "numeric", minute: "numeric" } as const;
-    let groupSub = await this.db.collection<Group>('/Groups').ref.get();
-    this.groups = groupSub.docs.map((doc) => {
-      return {
-        Name: doc.get("Name"),
-        joinCode: doc.get("joinCode"),
-        numPeople: doc.get("numPeople"),
-        People: doc.get("People"),
-        description: doc.get("description"),
-        date: new Date(doc.get("date")).toLocaleString('en-US', dateFormatting),
-        id: doc.id
-      };
-    });
+    this.groups = await this.dataService.getAllGroups();
     this.groups = this.groups.filter((group: Group) => groupIds.includes(group.id))
   }
 

@@ -22,7 +22,8 @@ export class JoinGroupPage implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private afMessaging: AngularFireMessaging,
-    private toastCtrl: ToastController) { this.listenForMessages(); }
+    private toastCtrl: ToastController,
+    private dataService: DataServiceService) { this.listenForMessages(); }
 
   ngOnInit() {
     this.userID = String(this.route.snapshot.paramMap.get('id')); //gets userID from route parameter
@@ -47,33 +48,13 @@ export class JoinGroupPage implements OnInit {
   }
 
   async joinGroup() {
-    let groupSub = await this.db.collection<Group>('/Groups').ref.get();
-    this.groups = groupSub.docs.map((doc) => {
-      return {
-        Name: doc.get("Name"),
-        joinCode: doc.get("joinCode"),
-        numPeople: doc.get("numPeople"),
-        People: doc.get("People"),
-        description: doc.get("description"),
-        date: doc.get("date"),
-        id: doc.id
-      };
-    })
+    this.groups = await this.dataService.getAllGroups();
     let codes: string[] = [];
     this.groups.forEach(group => { codes.push(group.joinCode) });
     let groupIndex = codes.findIndex(gCode => this.code === gCode);
     if (groupIndex !== -1) {
       let group = this.groups[groupIndex];
-      let userDoc = await this.db.collection<Person>('/People').ref.doc(this.userID).get();
-      let user = {
-        Groups: userDoc.get("Groups"),
-        Interests: userDoc.get("Interests"),
-        Name: userDoc.get("Name"),
-        PhoneNumber: userDoc.get("PhoneNumber"),
-        Token: userDoc.get("Token"),
-        email: userDoc.get("email"),
-        id: userDoc.id
-      }
+      let user = await this.dataService.getUser();
       if (group.People.length < group.numPeople) {
         group.People.push({ Name: user.Name, id: user.id });
         user.Groups.push({ GifteeName: "", GifteeID: "", GroupID: group.id });
