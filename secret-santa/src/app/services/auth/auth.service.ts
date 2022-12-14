@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from '@angular/fire/auth';
-import { getAuth, deleteUser, reauthenticateWithCredential } from "firebase/auth";
+import { getAuth, deleteUser, reauthenticateWithCredential, EmailAuthProvider } from "firebase/auth";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,11 @@ export class AuthService {
 
   constructor(private auth: Auth) { }
 
-  // except this code is from https://firebase.google.com/docs/auth/web/manage-users#web-version-9_11 !!
+  /*
+    Deletes a user from Firebase's list of authenticated users.
+    Assumes user has been signed in recently (see reAuthenticate()).
+    Code from https://firebase.google.com/docs/auth/web/manage-users#web-version-9_11
+  */
   deleteUser = () => {
     const auth = getAuth();
     const user = auth.currentUser;
@@ -47,16 +51,25 @@ export class AuthService {
     }
   }
 
-  reAuthenticate () {
+  /*
+    reAuthenticate() re-authenticates a user with their email/password.
+    Code from: https://stackoverflow.com/questions/66876714/how-to-make-the-credential-argument-for-reauthenticatewithcredential-in-fireb
+  */
+  reAuthenticate (userpw: string) {
     const auth = getAuth();
     const user = auth.currentUser;
 
     if (user) {
-
+      const {email} = user;   // get user's email
+      if (email) {
+        const credential = EmailAuthProvider.credential(email, userpw);   // make credential object
+        try {
+          reauthenticateWithCredential(user, credential)
+        } catch(err) {
+          console.log(err);
+        }
+      }
     }
-
-    // const credential = promptForCredentials();
-    // reauthenticateWithCredential(user, credential)
   }
 
   // TODO: get reset password working
