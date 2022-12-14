@@ -7,7 +7,7 @@
   </div>
 </ion-button> -->
 
-<button class="button" routerLink="/group-view">
+<button id="button" routerLink="/group-view" [ngClass]="[bgColor]">
   <div class="button-content">
     <!--TODO: make text variables passed in from parent-->
     <span id="group-name">{{groupName}}</span>

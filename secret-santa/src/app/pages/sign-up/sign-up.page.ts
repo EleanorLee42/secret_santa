@@ -58,7 +58,6 @@ export class SignUpPage implements OnInit {
     let newPerson = {
       // form does validation checks for us -- these won't be null
       email: this?.email?.value,
-      password: this?.password?.value,
       Groups: [],
     }
     // create new doc w/ set id

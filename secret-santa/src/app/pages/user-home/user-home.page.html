@@ -12,13 +12,11 @@
     <div class="my-groups">
       <strong>My groups</strong>
     </div>
-    <div *ngFor="let group of groups">
-      <group-banner groupName={{group.Name}} [gifteeName]=gifteeName(group.id) exchangeDate={{group.date}}
+    <ng-container *ngFor="let group of groups; even as isEven">
+      <group-banner groupName={{group.Name}} [gifteeName]=gifteeName(group.id) 
+        exchangeDate={{group.date}} [bgColor]="isEven?'green':'red'"
         routerLink="/group-view/{{group.id}}/{{userID}}"></group-banner>
-    </div>
-    <!--TODO: make this an ngfor display of user's groups-->
-    <!--Also make the banner colors alternate-->
-    <!-- <group-banner groupID={{group.id}} userID={{userID}}></group-banner> -->
+    </ng-container>
 
     <div class="foot-div">
       <ion-button routerLink="/edit-profile/{{userID}}" routerDirection="back">Profile</ion-button>
