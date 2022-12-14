@@ -7,6 +7,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
   styleUrls: ['./group-banner.component.scss'],
 })
 export class GroupBannerComponent {
+  @Input() bgColor: string;
   @Input() groupName: string;
   @Input() gifteeName: string;
   @Input() exchangeDate: string;

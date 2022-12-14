@@ -2,9 +2,10 @@
 
   <ion-toolbar class="green-background">
     <!--TODO: how to get text to wrap??-->
+    <p class="name-label">Name</p>
     <ion-item class="input-name">
-      <ion-label position="stacked">Name</ion-label>
-      <ion-input value={{user?.Name}} [clearInput]="true" [(ngModel)]="newName" (ionFocus)="focus()"></ion-input>
+      <!-- <ion-label position="stacked">Name</ion-label> -->
+      <ion-input value={{user?.Name}} [clearInput]="true" [(ngModel)]="newName"></ion-input>
     </ion-item>
   </ion-toolbar>
 
@@ -27,7 +28,8 @@
   </ion-item>
 
   <div class="foot-div">
-    <ion-button (click)="editProfile()">Save</ion-button>
     <ion-button id="cancel-btn" routerLink="/user-home/{{userID}}">Cancel</ion-button>
+    <ion-button id="delete-btn" (click)="deleteUser()">Delete account</ion-button>
+    <ion-button (click)="editProfile()">Save</ion-button>
   </div>
 </ion-content>

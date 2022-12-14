@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { DocumentReference, doc, setDoc, getFirestore } from 'firebase/firestore';
 import { createThis } from 'typescript';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -58,7 +58,6 @@ export class SignUpPage implements OnInit {
     let newPerson = {
       // form does validation checks for us -- these won't be null
       email: this?.email?.value,
-      password: this?.password?.value,
       Groups: [],
     }
     // create new doc w/ set id

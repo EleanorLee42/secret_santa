@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
 import { updateCurrentUser } from 'firebase/auth';
 import { Group, MiniGroup, MiniPerson, Person } from 'src/app/interfaces';
-import { DataServiceService } from 'src/app/services/dataService/data-service.service';
+import { DataServiceService } from '../../services/dataService/data-service.service';
 
 @Component({
   selector: 'app-join-group',

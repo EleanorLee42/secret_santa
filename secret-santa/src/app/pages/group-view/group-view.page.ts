@@ -7,7 +7,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/comp
 import { AngularFireMessaging } from '@angular/fire/compat/messaging';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Group, MiniGroup, Person } from 'src/app/interfaces';
-import { DataServiceService } from 'src/app/services/dataService/data-service.service';
+import { DataServiceService } from '../../services/dataService/data-service.service';
 import { deleteDoc, doc, getFirestore } from 'firebase/firestore';
 
 

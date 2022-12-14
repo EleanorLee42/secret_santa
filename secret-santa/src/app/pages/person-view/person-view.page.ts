@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AngularFireMessaging } from '@angular/fire/compat/messaging';
 import { ToastController } from '@ionic/angular';
 import { MiniGroup, Person } from 'src/app/interfaces';
-import { DataServiceService } from 'src/app/services/dataService/data-service.service';
+import { DataServiceService } from '../../services/dataService/data-service.service';
 
 @Component({
   selector: 'app-person-view',

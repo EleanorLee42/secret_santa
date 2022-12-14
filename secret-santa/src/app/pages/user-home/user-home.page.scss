@@ -8,6 +8,18 @@
     margin-left: 3%;
 }
 
+// alternate green/red colors for buttons!!
+// this is very exciting!!!
+group-banner:nth-child(even) {
+    background-color: #138A36;
+    --background-activated: #138A36;
+  }
+  
+group-banner:nth-child(odd) {
+    background-color: #CC2936;
+    --background-activated: #CC2936;
+  }
+
 // keep profile, new group buttons at bottom of page
 .foot-div {
     align-items: center;

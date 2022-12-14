@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireMessaging } from '@angular/fire/compat/messaging';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { IonInput, ToastController } from '@ionic/angular';
 import { MiniGroup, Person } from 'src/app/interfaces';
-import { DataServiceService } from 'src/app/services/dataService/data-service.service';
+import { DataServiceService } from '../../services/dataService/data-service.service';
+
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.page.html',
@@ -18,7 +20,11 @@ export class EditProfilePage implements OnInit {
   newInterests: string;
   newPhone: string;
 
+  // for focus() function/name input styling
+  public whiteText: boolean = false;
+
   constructor(
+    private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute,
     private db: AngularFirestore,
@@ -36,6 +42,11 @@ export class EditProfilePage implements OnInit {
     this.newName = this.user.Name;
     this.newInterests = this.user.Interests;
     this.newPhone = this.user.PhoneNumber;
+  }
+
+  deleteUser () {
+    this.authService.deleteUser();
+    this.router.navigate(['/home'], { replaceUrl: true });
   }
 
   editProfile() {
@@ -62,11 +73,6 @@ export class EditProfilePage implements OnInit {
 
       await toast.present();
     });
-  }
-
-  focus() {
-    console.log('focus called!');
-    //   @ViewChild('IonInput') ionItem: IonItem;
   }
 
   ngOnInit() {
