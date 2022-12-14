@@ -4,10 +4,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/comp
 import { AngularFireMessaging } from '@angular/fire/compat/messaging';
 import { ToastController } from '@ionic/angular';
 import { MiniGroup, Person } from 'src/app/interfaces';
-<<<<<<< Updated upstream
-=======
 import { DataServiceService } from '../../services/dataService/data-service.service';
->>>>>>> Stashed changes
 
 @Component({
   selector: 'app-person-view',

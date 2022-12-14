@@ -2,16 +2,10 @@
 
   <ion-toolbar class="green-background">
     <!--TODO: how to get text to wrap??-->
-<<<<<<< Updated upstream
-    <ion-item [ngClass]="{'input-name':true, 'white-text': whiteText}" id="#name">
-      <ion-label position="stacked">Name</ion-label>
-      <ion-input value={{user?.Name}} [clearInput]="true" [(ngModel)]="newName" (ionFocus)="focus()"></ion-input>
-=======
     <p class="name-label">Name</p>
     <ion-item class="input-name">
       <!-- <ion-label position="stacked">Name</ion-label> -->
       <ion-input value={{user?.Name}} [clearInput]="true" [(ngModel)]="newName"></ion-input>
->>>>>>> Stashed changes
     </ion-item>
   </ion-toolbar>
 

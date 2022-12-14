@@ -5,10 +5,7 @@ import { ToastController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Group, MiniGroup, MiniPerson, Person } from 'src/app/interfaces';
-<<<<<<< Updated upstream
-=======
 import { DataServiceService } from '../../services/dataService/data-service.service';
->>>>>>> Stashed changes
 
 @Component({
   selector: 'app-user-home',
