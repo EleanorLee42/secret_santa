@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { PublicGroupsPageRoutingModule } from './public-groups-routing.module';
 
 import { PublicGroupsPage } from './public-groups.page';
-import { GroupBannerComponent } from 'src/app/components/group-banner/group-banner.component';
+import { GroupBannerComponent } from '../../components/group-banner/group-banner.component';
 
 @NgModule({
   imports: [
