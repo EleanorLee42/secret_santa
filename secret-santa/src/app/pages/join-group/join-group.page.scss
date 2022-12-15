@@ -12,7 +12,6 @@
     --background: #251605;
     --background-activated: #251605;
     font-size: 1.2em;
-    // margin-left: 8%;
 }
 
 // Container: div that holds the page's main content
@@ -26,9 +25,6 @@
     --background: #138A36;
     --background-activated: #138A36;
     font-size: 1.2em;
-    // margin-left: 70%;
-    // margin-right: auto;
-    // margin-top: 10%;
 }
 
 // styling for page header (back btn)
@@ -46,7 +42,6 @@ ion-input.input {
     margin-left: 3%;
     margin-right: auto;
     max-width: 90%;
-    --padding-start: 10px; // why is this not working?? 
 }
 
 // title-div: holds the page's title

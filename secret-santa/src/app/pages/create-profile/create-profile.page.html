@@ -14,18 +14,18 @@
 
     <form (ngSubmit)="finishProfile()" [formGroup]="details">
       <ion-item lines="none">
-        <ion-input class="input" [clearOnEdit]="true" 
+        <ion-input class="input"
         placeholder="name" formControlName="name" required></ion-input>
       </ion-item>
 
       <ion-item lines="none">
         <ion-input class="input" type="tel" 
-        [clearOnEdit]="true" placeholder="phone number"
+        placeholder="phone number"
         formControlName="phone" required></ion-input>
       </ion-item>
 
       <ion-item lines="none">
-        <ion-textarea class="input" [clearOnEdit]="true" 
+        <ion-textarea class="input"
         placeholder="interests (cooking, coffee, Batman, etc.)"
         formControlName="interests" required></ion-textarea>
       </ion-item>

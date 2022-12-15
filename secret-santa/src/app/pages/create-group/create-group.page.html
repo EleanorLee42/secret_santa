@@ -15,7 +15,7 @@
 
     <form (ngSubmit)="makeGroup()" #f="ngForm">
       <ion-item lines="none">
-        <ion-input class="input" [clearOnEdit]="true" placeholder="group name" name="name" [(ngModel)]="groupName"
+        <ion-input class="input" placeholder="group name" name="name" [(ngModel)]="groupName"
           required></ion-input>
       </ion-item>
 
@@ -27,15 +27,15 @@
       </ion-modal>
 
       <ion-item lines="none">
-        <ion-input class="input" type="tel" [clearOnEdit]="true" placeholder="max number of people" name="numPeople"
+        <ion-input class="input" type="tel" placeholder="max number of people" name="numPeople"
           [(ngModel)]="numPeople" reqired></ion-input>
       </ion-item>
       <ion-item lines="none">
-        <ion-textarea class="input" [clearOnEdit]="true" placeholder="group description" name="description"
+        <ion-textarea class="input" placeholder="group description" name="description"
           [(ngModel)]="groupDescription" required></ion-textarea>
       </ion-item>
 
-      <ion-item>
+      <ion-item lines="none" class="public-toggle">
         <ion-label>Public group?</ion-label>
         <ion-toggle slot="end" name="isPublic" [(ngModel)]="isPublic"></ion-toggle>
       </ion-item>

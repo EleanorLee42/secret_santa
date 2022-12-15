@@ -1,7 +1,7 @@
 // Container: div that holds the page's main content
 #container {
     display: block;
-    padding-top: 20%;
+    padding-top: 15%;
 }
 
 // styling for Done button
@@ -25,10 +25,17 @@ ion-input.input {
     background-color: #D9D9D9;
     font-size: 1.2em;
     height: 100%;
-    margin-bottom: 10%;
+    // margin-bottom: 10%;
+    margin-top: 10%;
     margin-left: 3%;
     margin-right: auto;
     max-width: 90%;
+}
+
+.helptext {
+    color: #CC2936;
+    margin-top: 2%;
+    margin-left: 8%;
 }
 
 // title-div: holds the page's title
