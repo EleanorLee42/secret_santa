@@ -15,9 +15,9 @@
   <div class="content exchange-date">The exchange will happen {{group?.date}}</div>
   <div class="content people-div">
     <p>People:</p>
-    <p *ngFor="let person of people" class="member person-p"
+    <p *ngFor="let person of people; let i=index" class="member person-p"
       routerLink="/person-view/{{person.id}}/{{group.id}}/{{userID}}">
-      {{person?.Name}}
+      {{nicknames[i]}}
       <ng-container class="star-container" *ngIf="person.id === user.Groups[userGroupIndex].GifteeID">
         <ion-icon name="star"></ion-icon>
       </ng-container>

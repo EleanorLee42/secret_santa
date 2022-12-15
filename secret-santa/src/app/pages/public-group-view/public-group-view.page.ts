@@ -25,6 +25,7 @@ export class PublicGroupViewPage implements OnInit {
   userGroupIndex: number;
   groups: Group[];
   inGroup: boolean;
+  nickname: string;
 
   constructor(private toastCtrl: ToastController,
     private db: AngularFirestore,
@@ -38,6 +39,8 @@ export class PublicGroupViewPage implements OnInit {
 
   async ngOnInit() {
     this.user = await this.dataService.getUser();
+
+    this.nickname = this.user.Name;
     this.userGroupIndex = this.user.Groups.findIndex((group: MiniGroup) => group.GroupID === this.groupID);
     this.group = await this.dataService.getOneGroup(this.groupID);
     this.people = await this.dataService.getAllPeople();
@@ -61,7 +64,7 @@ export class PublicGroupViewPage implements OnInit {
   async joinGroup() {
     console.log(this.group);
     console.log(this.group.adminID);
-    this.group.People.push({ Name: this.user.Name, id: this.user.id });
+    this.group.People.push({ Name: this.user.Name, id: this.user.id, nickname: this.nickname });
     this.user.Groups.push({ GifteeName: "", GifteeID: "", GroupID: this.group.id });
     this.db.collection<Person>('/People').doc(this.userID).update(this.user);
     this.db.collection<Group>('/Groups').doc(this.group.id).update(this.group);

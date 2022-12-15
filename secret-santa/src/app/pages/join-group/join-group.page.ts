@@ -16,6 +16,8 @@ export class JoinGroupPage implements OnInit {
   userID: string;
   code: string;
   groups: Group[];
+  nickname: string;
+  user: Person;
 
   constructor(private db: AngularFirestore,
     private alertCtrl: AlertController,
@@ -25,8 +27,10 @@ export class JoinGroupPage implements OnInit {
     private toastCtrl: ToastController,
     private dataService: DataServiceService) { this.listenForMessages(); }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.userID = String(this.route.snapshot.paramMap.get('id')); //gets userID from route parameter
+    this.user = await this.dataService.getUser();
+    this.nickname = this.user.Name
   }
 
   listenForMessages = async () => {
@@ -54,11 +58,10 @@ export class JoinGroupPage implements OnInit {
     let groupIndex = codes.findIndex(gCode => this.code === gCode);
     if (groupIndex !== -1) {
       let group = this.groups[groupIndex];
-      let user = await this.dataService.getUser();
       if (group.People.length < group.numPeople) {
-        group.People.push({ Name: user.Name, id: user.id });
-        user.Groups.push({ GifteeName: "", GifteeID: "", GroupID: group.id });
-        this.db.collection<Person>('/People').doc(this.userID).update(user);
+        group.People.push({ Name: this.user.Name, id: this.user.id, nickname: this.nickname });
+        this.user.Groups.push({ GifteeName: "", GifteeID: "", GroupID: group.id });
+        this.db.collection<Person>('/People').doc(this.userID).update(this.user);
         this.db.collection<Group>('/Groups').doc(group.id).update(group);
         this.router.navigate(['/group-view', group.id, this.userID]);
       } else {

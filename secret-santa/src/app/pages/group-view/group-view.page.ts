@@ -25,6 +25,8 @@ export class GroupViewPage implements OnInit {
   group: Group; // Current group
   messaging = getMessaging(initializeApp(environment.firebase));
   userGroupIndex: number;
+  ids: string[] = [];
+  nicknames: string[] = [];
 
   constructor(private toastCtrl: ToastController,
     private db: AngularFirestore,
@@ -36,17 +38,32 @@ export class GroupViewPage implements OnInit {
     this.groupID = String(this.route.snapshot.paramMap.get('id')); //gets groupID from route parameter
   }
 
+
+  getPersonIndex(personID: string) {
+    console.log(this.ids);
+    return this.ids?.findIndex((id: string) => id === personID);
+  }
+
   async ngOnInit() {
     this.user = await this.dataService.getUser();
-    this.userGroupIndex = this.user.Groups.findIndex((group: MiniGroup) => group.GroupID === this.groupID);
+    this.userGroupIndex = this.user.Groups?.findIndex((group: MiniGroup) => group.GroupID === this.groupID);
     this.group = await this.dataService.getOneGroup(this.groupID);
     this.people = await this.dataService.getAllPeople();
-    let ids: string[] = [];
     this.group.People.forEach(element => {
-      ids.push(element.id);
+      this.ids.push(element.id);
     });
-    this.people = this.people.filter(person => ids.includes(person.id));
-    this.userID = this.user.id;
+    this.people = this.people.filter(person => this.ids.includes(person.id));
+    let id = 0;
+    for (let i = 0; i < this.people.length; i++) {
+      for (let j = 0; j < this.people.length; j++) {
+        let id = this.group.People[j].id;
+        if (id === this.people[i].id) {
+          this.ids[i] = id;
+          this.nicknames[i] = this.group.People[j].nickname;
+        }
+      }
+      this.userID = this.user.id;
+    }
   }
 
   assignPartners = () => {

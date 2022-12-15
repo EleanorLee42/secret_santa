@@ -23,6 +23,7 @@ export class CreateGroupPage implements OnInit {
   codes: string[] = [];
   user: Person;
   isPublic: boolean;
+  nickname: string;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -42,6 +43,7 @@ export class CreateGroupPage implements OnInit {
     this.currentDate = new Date().toISOString();
     this.user = await this.dataService.getUser();
     this.userID = this.user.id;
+    this.nickname = this.user.Name
   }
 
   checkCode(newCode: string): boolean {
@@ -72,7 +74,7 @@ export class CreateGroupPage implements OnInit {
       Name: this.groupName,
       joinCode: code,
       numPeople: Number(this.numPeople),
-      People: [{ Name: this.user.Name, id: this.user.id }],
+      People: [{ Name: this.user.Name, id: this.user.id, nickname: this.nickname }],
       date: groupDateString,
       description: this.groupDescription,
       isPublic: this.isPublic,
