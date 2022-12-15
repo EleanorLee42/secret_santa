@@ -25,6 +25,8 @@ export class GroupViewPage implements OnInit {
   group: Group; // Current group
   messaging = getMessaging(initializeApp(environment.firebase));
   userGroupIndex: number;
+  ids: string[] = [];
+  nicknames: string[] = [];
 
   constructor(private toastCtrl: ToastController,
     private db: AngularFirestore,
@@ -36,21 +38,41 @@ export class GroupViewPage implements OnInit {
     this.groupID = String(this.route.snapshot.paramMap.get('id')); //gets groupID from route parameter
   }
 
-  async ngOnInit() {
-    this.user = await this.dataService.getUser();
-    this.userGroupIndex = this.user.Groups.findIndex((group: MiniGroup) => group.GroupID === this.groupID);
-    this.group = await this.dataService.getOneGroup(this.groupID);
-    this.people = await this.dataService.getAllPeople();
-    let ids: string[] = [];
-    this.group.People.forEach(element => {
-      ids.push(element.id);
-    });
-    this.people = this.people.filter(person => ids.includes(person.id));
-    this.userID = this.user.id;
+
+  getPersonIndex(personID: string) {
+    console.log(this.ids);
+    return this.ids?.findIndex((id: string) => id === personID);
   }
 
+  async ngOnInit() {
+    this.user = await this.dataService.getUser();
+    this.userGroupIndex = this.user.Groups?.findIndex((group: MiniGroup) => group.GroupID === this.groupID);
+    this.group = await this.dataService.getOneGroup(this.groupID);
+    this.people = await this.dataService.getAllPeople();
+    this.group.People.forEach(element => {
+      this.ids.push(element.id);
+    });
+    //set this.people to the list of people who are part of this group
+    this.people = this.people.filter(person => this.ids.includes(person.id));
+    let id = "";
+
+    //ensures ids, nicknames, and this.people are in the same order
+    for (let i = 0; i < this.people.length; i++) {
+      for (let j = 0; j < this.people.length; j++) {
+        id = this.group.People[j].id;
+        if (id === this.people[i].id) {
+          this.ids[i] = id;
+          this.nicknames[i] = this.group.People[j].nickname;
+        }
+      }
+      this.userID = this.user.id;
+    }
+  }
+
+  // Assigns each person to a random other person and updates their doc with the nickname and ID of
+  //the person they need to get a gift for
   assignPartners = () => {
-    //Fisher-Yates shuffle from w3schools
+    //Fisher-Yates shuffle from w3schools, randomly shuffles the list of people in the group
     let groupPeople = this.group.People;
     for (let i = groupPeople.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1));
@@ -64,11 +86,12 @@ export class GroupViewPage implements OnInit {
       peopleIndex = this.people.findIndex((person: Person) => person.id === groupPeople[i].id);
       groupIndex = this.people[peopleIndex].Groups.findIndex((group: MiniGroup) => group.GroupID === this.group.id);
       this.people[peopleIndex].Groups[groupIndex].GifteeID = groupPeople[(i + 1) % groupPeople.length].id;
-      this.people[peopleIndex].Groups[groupIndex].GifteeName = groupPeople[(i + 1) % groupPeople.length].Name;
+      this.people[peopleIndex].Groups[groupIndex].GifteeName = groupPeople[(i + 1) % groupPeople.length].nickname;
       this.peopleCollection.doc(this.people![peopleIndex].id).update(this.people![peopleIndex]);
     }
   }
 
+  // Deletes the group doc, and removed the group from each person's list of groups they're in
   async deleteGroup() {
     console.log(this.people);
     this.people.forEach((person: Person) => {
@@ -80,7 +103,6 @@ export class GroupViewPage implements OnInit {
     let datab = getFirestore();
     let docRef = doc(datab, "Groups", this.groupID);
     deleteDoc(docRef);
-    // await this.db.collection<Group>('/Group').doc(this.groupID).delete();
     this.router.navigate(['/user-home', this.userID]);
   }
 

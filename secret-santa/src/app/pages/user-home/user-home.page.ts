@@ -17,7 +17,6 @@ export class UserHomePage implements OnInit {
   userID: string;
   public groups: Group[] | undefined; // Current group
   user: Person;
-  // messaging = getMessaging(initializeApp(environment.firebase));
 
   constructor(
     private route: ActivatedRoute,
@@ -45,7 +44,6 @@ export class UserHomePage implements OnInit {
           if (!token) {
             token = "";
           }
-          // console.log('Permission granted! Save to the server!', token);
           this.db.collection<Person>('/People').doc(this.userID).update({ "Token": token! });
         },
         (error) => { console.error(error); },
@@ -62,6 +60,7 @@ export class UserHomePage implements OnInit {
     let groupIds: string[] = [];
     this.user.Groups.forEach((group: MiniGroup) => groupIds.push(group.GroupID));
     this.groups = await this.dataService.getAllGroups();
+    //sets this.groups to be only the groups the user is in
     this.groups = this.groups.filter((group: Group) => groupIds.includes(group.id))
   }
 

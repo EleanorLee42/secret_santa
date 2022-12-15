@@ -39,7 +39,6 @@ export class CreateProfilePage implements OnInit {
     this.userId = String(this.route.snapshot.paramMap.get('id'));
     this.details = this.fb.group({
       // Validators for form input
-      // TODO: figure out validating phone number
       name: ['', [Validators.required]],
       phone: ['', [Validators.required]],
       interests: ['', [Validators.required]],

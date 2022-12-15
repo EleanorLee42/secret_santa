@@ -9,35 +9,31 @@
     <!--title-div wraps title for display purposes-->
     <div id="title-div">
       <strong class="title">finish profile</strong>
-      <!-- <div><strong>Add details about your interests!</strong></div> -->
     </div>
 
     <form (ngSubmit)="finishProfile()" [formGroup]="details">
       <ion-item lines="none">
-        <ion-input class="input" [clearOnEdit]="true" 
-        placeholder="name" formControlName="name" required></ion-input>
+        <ion-input class="input" [clearOnEdit]="true" placeholder="name" formControlName="name" required></ion-input>
       </ion-item>
 
       <ion-item lines="none">
-        <ion-input class="input" type="tel" 
-        [clearOnEdit]="true" placeholder="phone number"
-        formControlName="phone" required></ion-input>
+        <ion-input class="input" type="tel" [clearOnEdit]="true" placeholder="phone number" formControlName="phone"
+          required></ion-input>
       </ion-item>
 
       <ion-item lines="none">
-        <ion-textarea class="input" [clearOnEdit]="true" 
-        placeholder="interests (cooking, coffee, Batman, etc.)"
-        formControlName="interests" required></ion-textarea>
+        <ion-textarea class="input" [clearOnEdit]="true" placeholder="interests (cooking, coffee, Batman, etc.)"
+          formControlName="interests" required></ion-textarea>
       </ion-item>
 
       <ion-button type="submit" [disabled]="!details.valid">Done</ion-button>
 
     </form>
 
-    
-    
-    
-    
+
+
+
+
 
   </div>
 </ion-content>

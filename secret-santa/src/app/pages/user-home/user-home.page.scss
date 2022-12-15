@@ -32,8 +32,8 @@ group-banner:nth-child(odd) {
 
 // class for styling page header
 .header {
-    align-items: center;
     background-color: #251605;
+    height: 20%;
 }
 
 // style buttons at bottom of page
@@ -52,13 +52,14 @@ ion-title {
     color: #FFFCF2;
     font-family: 'Inconsolata';
     font-size: 1.9em;
+    height: 100%;
     text-align: center;
     white-space: normal;
 }
 
 // set padding for page header
 .ion-padding-vertical {
-    padding: 18% 0;
+    padding: 15% 0;
 }
 
 // styling for strong text ("My groups")

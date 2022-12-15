@@ -4,11 +4,13 @@ require("firebase-functions/logger/compat");
 admin.initializeApp(
 );
 
+//Function fires whenever a document in the People collection is updated
 exports.docChange = functions.firestore.document("People/{docId}").onUpdate(async (change: any) => {
   let person = await change.after.data();
   let oldPerson = await change.before.data();
 
   for (let i = 0; i < person.Groups.length; i++) {
+    //If the gifteeID changes form an empty string to a non empty string and the person's token is set
     if (person.Groups[i].GifteeID !== "" && oldPerson.Groups[i].GifteeID === "" && person.Token) {
       let db = admin.firestore();
       let groupDoc = db.collection('/Groups').doc(person.Groups[i].GroupID);
@@ -34,6 +36,7 @@ exports.docChange = functions.firestore.document("People/{docId}").onUpdate(asyn
           }
         }
       };
+      //send message - NOTE: does not work in Safari, limitation of firebase
       await admin.messaging().send(message);
     }
   }
