@@ -49,6 +49,7 @@ export class CreateGroupPage implements OnInit {
   checkCode(newCode: string): boolean {
     return this.codes.includes(newCode);
   }
+  //make a random 8 character string
   getCode(): string {
     //code to make random string:
     // https://www.programiz.com/javascript/examples/generate-random-strings
@@ -64,6 +65,7 @@ export class CreateGroupPage implements OnInit {
     let groups = await this.dataService.getAllGroups();
     groups.forEach(group => { this.codes.push(group.joinCode) });
 
+    //get a 8 character join code, checking that it hasn't already been used
     let code = this.getCode();
     while (this.checkCode(code)) {
       code = this.getCode();
