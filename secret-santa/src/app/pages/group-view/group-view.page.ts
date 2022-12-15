@@ -81,7 +81,7 @@ export class GroupViewPage implements OnInit {
       peopleIndex = this.people.findIndex((person: Person) => person.id === groupPeople[i].id);
       groupIndex = this.people[peopleIndex].Groups.findIndex((group: MiniGroup) => group.GroupID === this.group.id);
       this.people[peopleIndex].Groups[groupIndex].GifteeID = groupPeople[(i + 1) % groupPeople.length].id;
-      this.people[peopleIndex].Groups[groupIndex].GifteeName = groupPeople[(i + 1) % groupPeople.length].Name;
+      this.people[peopleIndex].Groups[groupIndex].GifteeName = groupPeople[(i + 1) % groupPeople.length].nickname;
       this.peopleCollection.doc(this.people![peopleIndex].id).update(this.people![peopleIndex]);
     }
   }

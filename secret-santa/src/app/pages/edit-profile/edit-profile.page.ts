@@ -44,11 +44,6 @@ export class EditProfilePage implements OnInit {
     this.newPhone = this.user.PhoneNumber;
   }
 
-  deleteUser () {
-    this.authService.deleteUser();
-    this.router.navigate(['/home'], { replaceUrl: true });
-  }
-
   editProfile() {
     this.user.Name = this.newName;
     this.user.email = this.newEmail;
