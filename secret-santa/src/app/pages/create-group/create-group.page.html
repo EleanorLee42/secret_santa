@@ -47,7 +47,7 @@
 
       <div id="button-div">
         <ion-button id="cancel-btn" routerLink="/user-home/{{userID}}" routerDirection="back">Cancel</ion-button>
-        <ion-button type="submit" [disabled]="!ngForm.valid">Done</ion-button>
+        <ion-button type="submit" [disabled]="!ngForm.valid" (click)="makeGroup()">Done</ion-button>
       </div>
     </form>
 
