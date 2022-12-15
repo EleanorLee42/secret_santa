@@ -1,0 +1,28 @@
+<ion-header class="header ion-padding-vertical">
+
+  <!-- <ion-toolbar class="brown-background"> -->
+  <!-- <ion-title size="large">Public groups :)</ion-title> -->
+  <!-- </ion-toolbar> -->
+
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="content">
+    <div class="my-groups">
+      <strong>Public groups</strong>
+    </div>
+    <ng-container *ngFor="let group of groups; even as isEven">
+      <!--Alternating color on even/odd from https://stackoverflow.com/questions/72541404/make-every-odd-row-different-color-than-even-row-angular-and-css-->
+      <group-banner groupName={{group.Name}} exchangeDate={{group.date}} [bgColor]="isEven?'green':'red'"
+        routerLink="/public-group-view/{{group.id}}/{{userID}}"></group-banner>
+    </ng-container>
+
+    <div class="foot-div">
+      <ion-button id="cancel-btn" routerLink="/user-home/{{userID}}" routerDirection="back">Home</ion-button>
+    </div>
+
+  </div>
+
+  <!-- <ion-button expand="full" (click)="requestPermission()">Request Permission</ion-button> -->
+
+</ion-content>

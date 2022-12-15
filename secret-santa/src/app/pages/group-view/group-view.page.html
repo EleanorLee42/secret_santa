@@ -24,8 +24,10 @@
       <!-- TODO: change 'STAR' to actual star image -->
     </p>
   </div>
-  <ion-button (click)="assignPartners()">Assign Partners</ion-button>
-  <ion-button (click)="deleteGroup()">Delete this group</ion-button>
+  <div *ngIf="group?.adminID === userID">
+    <ion-button (click)="assignPartners()">Assign Partners</ion-button>
+    <ion-button (click)="deleteGroup()">Delete this group</ion-button>
+  </div>
 
   <div class="foot-div">
     <ion-button routerLink="/user-home/{{userID}}" routerDirection="back">Home</ion-button>

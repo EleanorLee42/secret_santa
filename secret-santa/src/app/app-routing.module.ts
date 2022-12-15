@@ -72,6 +72,14 @@ const routes: Routes = [
     path: 'join-group/:id',
     loadChildren: () => import('./pages/join-group/join-group.module').then(m => m.JoinGroupPageModule)
   },
+  {
+    path: 'public-groups/:id',
+    loadChildren: () => import('./pages/public-groups/public-groups.module').then(m => m.PublicGroupsPageModule)
+  },
+  {
+    path: 'public-group-view/:id/:uid',
+    loadChildren: () => import('./pages/public-group-view/public-group-view.module').then(m => m.PublicGroupViewPageModule)
+  },
 ];
 
 @NgModule({

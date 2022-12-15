@@ -22,6 +22,7 @@ export class CreateGroupPage implements OnInit {
   numPeople: string;
   codes: string[] = [];
   user: Person;
+  isPublic: boolean;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -74,7 +75,9 @@ export class CreateGroupPage implements OnInit {
       People: [{ Name: this.user.Name, id: this.user.id }],
       date: groupDateString,
       description: this.groupDescription,
+      isPublic: this.isPublic,
       id: "",
+      adminID: this.userID,
     }
     let newDoc = await this.db.collection<Group>('/Groups').add(newGroup);
     this.user.Groups.push({ GifteeName: "", GifteeID: "", GroupID: newDoc.id });
