@@ -40,6 +40,12 @@
         <ion-toggle slot="end" name="isPublic" [(ngModel)]="isPublic"></ion-toggle>
       </ion-item>
 
+      <ion-item lines="none">
+        <ion-label>Your nickname for this group. Note: This cannot be changed later</ion-label>
+        <ion-input class="input" [clearOnEdit]="true" placeholder="{{user?.Name}}" name="nickname"
+          [(ngModel)]="nickname" required></ion-input>
+      </ion-item>
+
       <div id="button-div">
         <ion-button id="cancel-btn" routerLink="/user-home/{{userID}}" routerDirection="back">Cancel</ion-button>
         <ion-button type="submit" [disabled]="!ngForm.valid">Done</ion-button>

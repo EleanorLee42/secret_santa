@@ -11,6 +11,11 @@
   <div class="content description">{{group?.description}}</div>
   <div class="content exchange-date">The exchange will happen {{group?.date}}</div>
   <div class="content">This group has {{group?.People?.length}} of {{group?.numPeople}} spots filled</div>
+  <ion-item lines="none">
+    <ion-label>Your nickname for this group. Note: This cannot be changed later</ion-label>
+    <ion-input class="input" [clearOnEdit]="true" placeholder="{{user?.Name}}" name="name" [(ngModel)]="nickname"
+      required></ion-input>
+  </ion-item>
   <div *ngIf="!inGroup" id="button-div">
     <ion-button id="join-btn" (click)="joinGroup()" size="large">Join group</ion-button>
   </div>

@@ -1,8 +1,8 @@
 export interface MiniPerson {
   Name: string;
   id: string;
+  nickname: string;
 }
-
 export interface Group {
   Name: string;
   joinCode: string;

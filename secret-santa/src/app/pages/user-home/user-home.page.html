@@ -1,9 +1,8 @@
-<ion-header class="header ion-padding-vertical">
+<ion-header class="header">
 
-  <ion-toolbar class="brown-background">
-    <!--TODO: how to get text to wrap??-->
-    <ion-title size="large">Welcome home, {{user?.Name}} :)</ion-title>
-  </ion-toolbar>
+    <ion-title size="large">
+      <div class="ion-text-wrap ion-padding-vertical">Welcome home, {{user?.Name}} :)</div>
+    </ion-title>
 
 </ion-header>
 
@@ -25,7 +24,5 @@
     </div>
 
   </div>
-
-  <!-- <ion-button expand="full" (click)="requestPermission()">Request Permission</ion-button> -->
 
 </ion-content>

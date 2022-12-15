@@ -44,11 +44,6 @@ export class EditProfilePage implements OnInit {
     this.newPhone = this.user.PhoneNumber;
   }
 
-  deleteUser () {
-    this.authService.deleteUser();
-    this.router.navigate(['/home'], { replaceUrl: true });
-  }
-
   editProfile() {
     this.user.Name = this.newName;
     this.user.email = this.newEmail;
@@ -57,6 +52,7 @@ export class EditProfilePage implements OnInit {
     this.db.collection<Person>('/People').doc(this.userID).update(this.user);
     this.router.navigate(['/user-home', this.userID]);
   }
+
   listenForMessages = async () => {
     // Based on https://devdactic.com/ionic-pwa-web-push
     this.afMessaging.messages.subscribe(async (msg: any) => {

@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  
+
   <!--Container div holds main content-->
   <div id="container">
     <!--title-div wraps title for display purposes-->
@@ -17,8 +17,8 @@
       <ion-item lines="none">
         <ion-input class="input" type="email"
         placeholder="email" formControlName="email" required></ion-input>
+
       </ion-item>
-      <!--TODO: add notes abt. invalid inputs-->
 
       <ion-item lines="none">
         <ion-input class="input" type="password"
@@ -26,13 +26,6 @@
       </ion-item>
       <p class="helptext">Minimum 8 characters</p>
       
-
-      <!-- <ion-item lines="none">
-        <ion-input class="input" type="password"
-        [clearOnEdit]="true" placeholder="confirm password"
-        formControlName="confirm_pw" required></ion-input>
-      </ion-item> -->
-      <!--TODO: figure out confirm password-->
 
       <ion-button id="done-btn" type="submit" [disabled]="!info.valid">Done</ion-button>
 
