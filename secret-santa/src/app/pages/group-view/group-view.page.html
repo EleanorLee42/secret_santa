@@ -5,8 +5,6 @@
     </ion-title>
     <p class="join-code">Join code: {{group?.joinCode}}</p>
     
-
- 
 </ion-header>
 
 <ion-content>
@@ -26,6 +24,8 @@
     <ion-button (click)="assignPartners()" *ngIf="group.People.length > 1">Assign Partners</ion-button>
     <ion-button (click)="deleteGroup()">Delete this group</ion-button>
   </div>
+
+  <div id="padding-div"></div>
 
   <div class="foot-div">
     <ion-button routerLink="/user-home/{{userID}}" routerDirection="back">Home</ion-button>

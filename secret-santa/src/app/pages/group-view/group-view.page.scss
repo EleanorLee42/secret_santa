@@ -73,6 +73,11 @@ ion-title {
     font-family: 'Inconsolata';
 }
 
+// padding to keep whitespace behind buttons
+#padding-div {
+    margin-bottom: 20%;
+}
+
 .person-p {
     display: flex;
     align-items: center;

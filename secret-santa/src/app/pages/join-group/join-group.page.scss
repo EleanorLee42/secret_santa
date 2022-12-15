@@ -44,6 +44,22 @@ ion-input.input {
     max-width: 90%;
 }
 
+// styling for join group button div
+#nickname-div {
+    display: block;
+    // font-size: 1.4em;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+// styling for nickname message
+#nickname-text {
+    color: #138A36;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+
 // title-div: holds the page's title
 #title-div {
     // Position content horizontally/vertically

@@ -61,6 +61,21 @@ ion-textarea {
     max-width: 90%;
 }
 
+// styling for join group button div
+#nickname-div {
+    display: block;
+    // font-size: 1.4em;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+// styling for nickname message
+#nickname-text {
+    color: #CC2936;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
 // styling for public/private input div
 .public-toggle {
     margin-left: 5%;

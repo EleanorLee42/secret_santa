@@ -17,12 +17,14 @@
         [bgColor]="isEven?'green':'red'" routerLink="/group-view/{{group.id}}/{{userID}}"></group-banner>
     </ng-container>
 
-    <div class="foot-div">
-      <ion-button routerLink="/edit-profile/{{userID}}" routerDirection="back">Profile</ion-button>
-      <ion-button routerLink="/new-group/{{userID}}" id="plus-button" shape="round">+</ion-button>
-      <ion-button (click)="logout()">Logout</ion-button>
-    </div>
+    <div id="padding-div"></div>
 
+  </div>
+
+  <div class="foot-div">
+    <ion-button routerLink="/edit-profile/{{userID}}" routerDirection="back">Profile</ion-button>
+    <ion-button routerLink="/new-group/{{userID}}" id="plus-button" shape="round">+</ion-button>
+    <ion-button (click)="logout()">Logout</ion-button>
   </div>
 
 </ion-content>
