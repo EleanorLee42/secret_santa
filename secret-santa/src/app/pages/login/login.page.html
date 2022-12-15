@@ -17,14 +17,12 @@
     <form (ngSubmit)="login()" [formGroup]="credentials">
       <ion-item lines="none">
         <ion-input class="input" type="email" 
-        [clearOnEdit]="true" placeholder="email"
-        formControlName="email"></ion-input>
+        placeholder="email" formControlName="email"></ion-input>
       </ion-item>
 
       <ion-item lines="none">
-        <ion-input [clearOnEdit]="true" class="input"
-        type="password" placeholder="password"
-        formControlName="password"></ion-input>
+        <ion-input class="input" type="password" 
+        placeholder="password" formControlName="password"></ion-input>
       </ion-item>
 
       <ion-button id="done-btn" type="submit" [disabled]="!credentials.valid">Done</ion-button>

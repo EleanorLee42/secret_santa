@@ -1,0 +1,72 @@
+// styling for back button
+#back-btn {
+    --background: #F3B700;
+    --background-activated: #F3B700;
+}
+
+// styling for join group button div
+#button-div {
+    display: flex;
+    margin-left: 4%;
+    margin-top: 10%;
+    justify-content: left;
+}
+
+// styling for non-header/-footer elements
+.content {
+    font-size: 1.4em;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 5%;
+}
+
+// keep home button at bottom of page
+.foot-div {
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0.5%;
+    left: 1%;
+    width: 98%;
+}
+
+// class to set bkgd to green (for ion-toolbar)
+.green-background {
+    --background: #138A36;
+}
+
+.green-text {
+    color: #138A36;
+}
+
+// class for styling page header
+.header {
+    background-color: #138A36;
+    margin-bottom: 5%;
+}
+
+// class for styling home button
+#home-btn {
+    --background: #251605;
+    --background-activated: #251605;
+}
+
+// set padding for page header
+.ion-padding-vertical {
+    padding-top: 15%;
+    padding-bottom: 10%;
+}
+
+// styling for page title
+ion-title {
+    color: #FFFCF2;
+    font-size: 2.5em;
+    text-align: left;
+    white-space: normal;
+}
+
+// styling for join group button
+#join-btn {
+    --background: #138A36;
+    --background-activated: #138A36;
+}

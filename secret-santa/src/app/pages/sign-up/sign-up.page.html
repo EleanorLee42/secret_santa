@@ -10,19 +10,22 @@
   <div id="container">
     <!--title-div wraps title for display purposes-->
     <div id="title-div">
-      <strong class="title">create account</strong>
+      <strong class="title">the more the merrier ;)</strong>
     </div>
 
     <form (ngSubmit)="signUp()" [formGroup]="info">
       <ion-item lines="none">
-        <ion-input class="input" type="email" [clearOnEdit]="true" placeholder="email" formControlName="email"
-          required></ion-input>
+        <ion-input class="input" type="email"
+        placeholder="email" formControlName="email" required></ion-input>
+
       </ion-item>
 
       <ion-item lines="none">
-        <ion-input class="input" type="password" [clearOnEdit]="true" placeholder="password" formControlName="password"
-          required></ion-input>
+        <ion-input class="input" type="password"
+        placeholder="password" formControlName="password" required></ion-input>
       </ion-item>
+      <p class="helptext">Minimum 8 characters</p>
+      
 
       <ion-button id="done-btn" type="submit" [disabled]="!info.valid">Done</ion-button>
 

@@ -1,0 +1,44 @@
+// styling for content below header
+.content {
+    margin-left: 3%;
+}
+
+// keep profile, new group buttons at bottom of page
+.foot-div {
+    position: fixed;
+    bottom: 1%;
+    left: 2%;
+    width: 95%;
+}
+
+// class for styling page header
+.header {
+    color: #251605;
+    font-family: 'Inconsolata';
+    font-size: 1.9em;
+    margin-bottom: 5%;
+    margin-left: 1%;
+    padding-top: 8%;
+}
+
+// style buttons at bottom of page
+ion-button {
+    --background: #F3B700;
+    --background-activated: #F3B700;
+    font-size: larger;
+}
+
+// styling for page header (back btn)
+ion-header {
+    padding-left: 3%;
+    padding-top: 5%;
+}
+
+// styling for page title/welcome msg
+ion-title {
+    color: #251605;
+    font-family: 'Inconsolata';
+    font-size: 1.9em;
+    text-align: center;
+    white-space: normal;
+}

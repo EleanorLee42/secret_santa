@@ -1,11 +1,15 @@
-<ion-header class="header ion-padding-vertical">
+<ion-header class="ion-padding-vertical">
+  <ion-buttons>
+    <ion-back-button defaultHref="/new-group/{{userID}}"></ion-back-button>
+  </ion-buttons>
+    <div class="header"><strong>Public groups</strong></div>
 
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <div class="content">
     <div class="my-groups">
-      <strong>Public groups</strong>
+      
     </div>
     <ng-container *ngFor="let group of groups; even as isEven">
       <!--Alternating color on even/odd from https://stackoverflow.com/questions/72541404/make-every-odd-row-different-color-than-even-row-angular-and-css-->
@@ -13,10 +17,10 @@
         routerLink="/public-group-view/{{group.id}}/{{userID}}"></group-banner>
     </ng-container>
 
-    <div class="foot-div">
-      <ion-button id="cancel-btn" routerLink="/user-home/{{userID}}" routerDirection="back">Home</ion-button>
-    </div>
+  </div>
 
+  <div class="foot-div">
+    <ion-button id="cancel-btn" routerLink="/user-home/{{userID}}" routerDirection="back">Home</ion-button>
   </div>
 
 </ion-content>

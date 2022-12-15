@@ -1,31 +1,32 @@
 <ion-header class="header ion-padding-vertical">
 
-  <ion-toolbar class="red-background">
+  <ion-toolbar class="green-background">
     <ion-title size="large">
       <div class="ion-text-wrap">{{group?.Name}}</div>
     </ion-title>
   </ion-toolbar>
-
-  <p class="join-code">Join code: {{group?.joinCode}}</p>
 </ion-header>
 
 <ion-content>
   <div class="content description">{{group?.description}}</div>
   <div class="content exchange-date">The exchange will happen {{group?.date}}</div>
-  <div>This group has {{group?.People?.length}} of {{group?.numPeople}} spots filled</div>
-
+  <div class="content">This group has {{group?.People?.length}} of {{group?.numPeople}} spots filled</div>
   <ion-item lines="none">
     <ion-label>Your nickname for this group. Note: This cannot be changed later</ion-label>
     <ion-input class="input" [clearOnEdit]="true" placeholder="{{user?.Name}}" name="name" [(ngModel)]="nickname"
       required></ion-input>
   </ion-item>
-  <ion-button *ngIf="!inGroup" (click)="joinGroup()">Join this group</ion-button>
+  <div *ngIf="!inGroup" id="button-div">
+    <ion-button id="join-btn" (click)="joinGroup()" size="large">Join group</ion-button>
+  </div>
 
-  <div *ngIf="inGroup">You are already in this group!</div>
+  <div class="content green-text" *ngIf="inGroup">You are already in this group!</div>
 
 
   <div class="foot-div">
-    <ion-button routerLink="/public-groups/{{userID}}" routerDirection="back">Back</ion-button>
-    <ion-button routerLink="/user-home/{{userID}}" routerDirection="back">Home</ion-button>
+    <ion-button id="back-btn" routerLink="/public-groups/{{userID}}" 
+    routerDirection="back" size="large">Back</ion-button>
+    <ion-button id="home-btn" routerLink="/user-home/{{userID}}" 
+    routerDirection="back" size="large">Home</ion-button>
   </div>
 </ion-content>
