@@ -1,12 +1,12 @@
-<ion-header class="header ion-padding-vertical">
+<ion-header class="header">
 
-  <ion-toolbar class="red-background">
     <ion-title size="large">
-      <div class="ion-text-wrap">{{group?.Name}}</div>
+      <div class="ion-text-wrap ion-padding-vertical">{{group?.Name}}</div>
     </ion-title>
-  </ion-toolbar>
+    <p class="join-code">Join code: {{group?.joinCode}}</p>
+    
 
-  <p class="join-code">Join code: {{group?.joinCode}}</p>
+ 
 </ion-header>
 
 <ion-content>
