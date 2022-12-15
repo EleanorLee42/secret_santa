@@ -3,7 +3,6 @@ export interface MiniPerson {
   id: string;
   nickname: string;
 }
-
 export interface Group {
   Name: string;
   joinCode: string;

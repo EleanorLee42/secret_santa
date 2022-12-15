@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireMessaging } from '@angular/fire/compat/messaging';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
-import { updateCurrentUser } from 'firebase/auth';
-import { Group, MiniGroup, MiniPerson, Person } from 'src/app/interfaces';
+import { Group, Person } from 'src/app/interfaces';
 import { DataServiceService } from '../../services/dataService/data-service.service';
 
 @Component({
@@ -22,14 +21,13 @@ export class JoinGroupPage implements OnInit {
   constructor(private db: AngularFirestore,
     private alertCtrl: AlertController,
     private router: Router,
-    private route: ActivatedRoute,
     private afMessaging: AngularFireMessaging,
     private toastCtrl: ToastController,
     private dataService: DataServiceService) { this.listenForMessages(); }
 
   async ngOnInit() {
-    this.userID = String(this.route.snapshot.paramMap.get('id')); //gets userID from route parameter
     this.user = await this.dataService.getUser();
+    this.userID = this.user.id;
     this.nickname = this.user.Name
   }
 
@@ -51,6 +49,8 @@ export class JoinGroupPage implements OnInit {
     });
   }
 
+  //checks if the given code is valid, if it is and there is room in the group
+  //adds the user to the group and updates their doc and the group's doc
   async joinGroup() {
     this.groups = await this.dataService.getAllGroups();
     let codes: string[] = [];

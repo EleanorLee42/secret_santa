@@ -54,13 +54,14 @@ export class PublicGroupViewPage implements OnInit {
     this.userIsInGroup();
   }
 
+  //checks if the user is already in the group
   userIsInGroup() {
     let peopleIDs: string[] = [];
     this.group.People.forEach((person: MiniPerson) => { peopleIDs.push(person.id) });
     this.inGroup = peopleIDs.includes(this.userID);
   }
 
-
+  //adds user to the group and updates their doc and the group's doc
   async joinGroup() {
     console.log(this.group);
     console.log(this.group.adminID);

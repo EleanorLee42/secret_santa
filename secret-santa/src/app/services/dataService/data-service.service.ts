@@ -10,6 +10,7 @@ export class DataServiceService {
   dateFormatting = { weekday: "long", year: "numeric", month: "short", day: "numeric", hour: "numeric", minute: "numeric" } as const;
   constructor(private db: AngularFirestore) { }
 
+  //returns the user
   async getUser(userID?: string): Promise<Person> {
     if (userID) {
       this.userID = userID;
@@ -27,6 +28,7 @@ export class DataServiceService {
     return user;
   }
 
+  //returns the group with the given ID
   async getOneGroup(groupID: string): Promise<Group> {
     let groupDoc = await this.db.collection<Group>('/Groups').ref.doc(groupID).get();
     let group = {
@@ -43,6 +45,7 @@ export class DataServiceService {
     return group;
   }
 
+  //returns a list of all the groups
   async getAllGroups(): Promise<Group[]> {
     let groupSub = await this.db.collection<Group>('/Groups').ref.get();
     let groups = groupSub.docs.map((doc) => {
@@ -61,6 +64,7 @@ export class DataServiceService {
     return groups;
   }
 
+  //returns the person with the given ID
   async getOnePerson(personID: string): Promise<Person> {
     let personDoc = await this.db.collection<Person>('/People').ref.doc(personID).get();
     let person = {
@@ -75,6 +79,7 @@ export class DataServiceService {
     return person;
   }
 
+  //returns all people
   async getAllPeople(): Promise<Person[]> {
     let peopleSnap = await this.db.collection("/People").ref.get();
     let people = peopleSnap.docs.map((doc) => {

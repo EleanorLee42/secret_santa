@@ -1,6 +1,5 @@
 <ion-header class="header ion-padding-vertical">
 
-  <!--TODO: make group color variable? Or store it in db somehow?-->
   <ion-toolbar class="red-background">
     <ion-title size="large">
       <div class="ion-text-wrap">{{group?.Name}}</div>
@@ -21,11 +20,10 @@
       <ng-container class="star-container" *ngIf="person.id === user.Groups[userGroupIndex].GifteeID">
         <ion-icon name="star"></ion-icon>
       </ng-container>
-      <!-- TODO: change 'STAR' to actual star image -->
     </p>
   </div>
   <div *ngIf="group?.adminID === userID">
-    <ion-button (click)="assignPartners()">Assign Partners</ion-button>
+    <ion-button (click)="assignPartners()" *ngIf="group.People.length > 1">Assign Partners</ion-button>
     <ion-button (click)="deleteGroup()">Delete this group</ion-button>
   </div>
 

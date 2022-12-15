@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AngularFireMessaging } from '@angular/fire/compat/messaging';
 import { ToastController } from '@ionic/angular';
-import { Group, MiniGroup, MiniPerson, Person } from 'src/app/interfaces';
+import { Group, Person } from 'src/app/interfaces';
 import { DataServiceService } from '../../services/dataService/data-service.service';
 
 @Component({
@@ -26,7 +26,7 @@ export class CreateGroupPage implements OnInit {
   isPublic: boolean = false;
 
 
-  constructor(private route: ActivatedRoute,
+  constructor(
     private router: Router,
     private db: AngularFirestore,
     private formBuilder: FormBuilder,
@@ -40,7 +40,6 @@ export class CreateGroupPage implements OnInit {
   }
 
   async ngOnInit() {
-    // this.userID = String(this.route.snapshot.paramMap.get('id')); //gets userID from route parameter
     this.currentDate = new Date().toISOString();
     this.user = await this.dataService.getUser();
     this.userID = this.user.id;

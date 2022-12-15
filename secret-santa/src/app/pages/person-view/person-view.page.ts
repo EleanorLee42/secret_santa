@@ -30,7 +30,7 @@ export class PersonViewPage implements OnInit {
     this.person = await this.dataService.getOnePerson(this.personID);
     let user = await this.dataService.getUser();
     let userGroupIndex = user.Groups.findIndex((element: MiniGroup) => element.GroupID === this.groupID);
-    this.ispartner = (user.Groups[userGroupIndex].GifteeID === this.person.id);
+    this.ispartner = (user.Groups[userGroupIndex].GifteeID === this.person.id); //checks if this person is the user's giftee
   }
 
   listenForMessages = async () => {

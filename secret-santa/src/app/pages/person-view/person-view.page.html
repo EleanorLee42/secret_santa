@@ -1,9 +1,9 @@
 <ion-header class="header ion-padding-vertical">
 
-  <!--TODO: make group color variable? Or store it in db somehow?-->
   <ion-toolbar class="red-background">
-    <!--TODO: how to get text to wrap??-->
-    <ion-title size="large">{{person?.Name}}</ion-title>
+    <ion-title size="large">
+      <div class="ion-text-wrap">{{person?.Name}}</div>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -18,7 +18,6 @@
   <div class="content phone">Phone: {{person?.PhoneNumber}}</div>
 
   <div class="foot-div">
-    <!--TODO: can the animation here go backwards?-->
     <ion-button routerLink="/group-view/{{groupID}}/{{userID}}" routerDirection="back">Done</ion-button>
   </div>
 </ion-content>
